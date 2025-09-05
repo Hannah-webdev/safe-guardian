@@ -58,6 +58,7 @@ const StudentDashboard = () => {
   const [emergencyMessage, setEmergencyMessage] = useState('');
   const [activeTab, setActiveTab] = useState('dashboard');
   const [speedDialOpen, setSpeedDialOpen] = useState(false);
+  const [sessionInfo, setSessionInfo] = useState(null);
 
   // Get current location
   useEffect(() => {
@@ -74,6 +75,19 @@ const StudentDashboard = () => {
           toast.error('Unable to get your location. Please enable location services.');
         }
       );
+    }
+  }, []);
+
+  // Load session information
+  useEffect(() => {
+    const sessionData = localStorage.getItem('sessionData');
+    if (sessionData) {
+      try {
+        const session = JSON.parse(sessionData);
+        setSessionInfo(session);
+      } catch (error) {
+        console.error('Error parsing session data:', error);
+      }
     }
   }, []);
 
@@ -96,6 +110,14 @@ const StudentDashboard = () => {
       const phoneNumbers = securityContacts.length > 0 
         ? securityContacts.map(contact => contact.phone)
         : defaultSecurityNumbers;
+
+      // Check if user has emergency contacts
+      if (securityContacts.length === 0) {
+        toast.warning('⚠️ No emergency contacts found! Using default security numbers. Consider adding your emergency contacts in the Emergency Contacts tab.', {
+          autoClose: 5000,
+          position: "top-center"
+        });
+      }
 
       // Simulate sending emergency alert
       const emergencyData = {
@@ -293,36 +315,67 @@ const StudentDashboard = () => {
         </Card>
       </Grid>
 
-      {/* Recent Activity */}
-      <Grid item xs={12} md={6}>
-        <Card>
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
-              Recent Activity
-            </Typography>
-            <List dense>
-              <ListItem>
-                <ListItemIcon>
-                  <Security color="success" />
-                </ListItemIcon>
-                <ListItemText
-                  primary="System Check"
-                  secondary="Last checked: 2 minutes ago"
-                />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <LocationOn color="primary" />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Location Updated"
-                  secondary="GPS coordinates refreshed"
-                />
-              </ListItem>
-            </List>
-          </CardContent>
-        </Card>
-      </Grid>
+             {/* Session Status */}
+       <Grid item xs={12} md={6}>
+         <Card>
+           <CardContent>
+             <Typography variant="h6" gutterBottom>
+               Session Status
+             </Typography>
+             {sessionInfo ? (
+               <Box>
+                 <Typography variant="body2" color="text.secondary" gutterBottom>
+                   Logged in: {new Date(sessionInfo.loginTime).toLocaleString()}
+                 </Typography>
+                 <Typography variant="body2" color="text.secondary" gutterBottom>
+                   Expires: {new Date(sessionInfo.expiryTime).toLocaleString()}
+                 </Typography>
+                 <Chip
+                   label="Session Active"
+                   color="success"
+                   size="small"
+                   sx={{ mt: 1 }}
+                 />
+               </Box>
+             ) : (
+               <Typography variant="body2" color="text.secondary">
+                 No session information available
+               </Typography>
+             )}
+           </CardContent>
+         </Card>
+       </Grid>
+
+       {/* Recent Activity */}
+       <Grid item xs={12} md={6}>
+         <Card>
+           <CardContent>
+             <Typography variant="h6" gutterBottom>
+               Recent Activity
+             </Typography>
+             <List dense>
+               <ListItem>
+                 <ListItemIcon>
+                   <Security color="success" />
+                 </ListItemIcon>
+                 <ListItemText
+                   primary="System Check"
+                   secondary="Last checked: 2 minutes ago"
+                 />
+               </ListItem>
+               <ListItem>
+                 <ListItemIcon>
+                   <LocationOn color="primary" />
+                 </ListItemIcon>
+                 <ListItemText
+                   primary="Location Updated"
+                   secondary="GPS coordinates refreshed"
+                 />
+               </ListItem>
+             </List>
+           </CardContent>
+         </Card>
+       </Grid>
     </Grid>
   );
 
@@ -449,6 +502,21 @@ const StudentDashboard = () => {
           <Alert severity="warning" sx={{ mb: 2 }}>
             This will immediately notify security personnel of your emergency.
           </Alert>
+          {(() => {
+            const securityContacts = JSON.parse(localStorage.getItem('securityContacts') || '[]');
+            if (securityContacts.length === 0) {
+              return (
+                <Alert severity="info" sx={{ mb: 2 }}>
+                  <Typography variant="body2">
+                    <strong>⚠️ No emergency contacts found!</strong><br />
+                    This alert will be sent to default security numbers. 
+                    Consider adding your emergency contacts in the Emergency Contacts tab for faster response.
+                  </Typography>
+                </Alert>
+              );
+            }
+            return null;
+          })()}
           <TextField
             fullWidth
             multiline

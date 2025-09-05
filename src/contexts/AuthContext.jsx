@@ -9,14 +9,32 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check for stored user data on app load
+    // Check for stored user data and session on app load
     const storedUser = localStorage.getItem('user');
-    if (storedUser) {
+    const sessionData = localStorage.getItem('sessionData');
+    
+    if (storedUser && sessionData) {
       try {
-        setUser(JSON.parse(storedUser));
+        const user = JSON.parse(storedUser);
+        const session = JSON.parse(sessionData);
+        
+        // Check if session is still valid (24 hours)
+        const now = new Date().getTime();
+        const sessionExpiry = session.loginTime + (24 * 60 * 60 * 1000); // 24 hours
+        
+        if (now < sessionExpiry) {
+          setUser(user);
+          console.log('Session restored successfully');
+        } else {
+          // Session expired, clear data
+          console.log('Session expired, clearing user data');
+          localStorage.removeItem('user');
+          localStorage.removeItem('sessionData');
+        }
       } catch (error) {
         console.error('Error parsing stored user data:', error);
         localStorage.removeItem('user');
+        localStorage.removeItem('sessionData');
       }
     }
     setLoading(false);
@@ -31,8 +49,17 @@ export const AuthProvider = ({ children }) => {
       
       if (response.success) {
         setUser(response.user);
+        
+        // Save user data and session information
         localStorage.setItem('user', JSON.stringify(response.user));
-        toast.success('Login successful!');
+        localStorage.setItem('sessionData', JSON.stringify({
+          loginTime: new Date().getTime(),
+          expiryTime: new Date().getTime() + (24 * 60 * 60 * 1000), // 24 hours
+          userAgent: navigator.userAgent,
+          loginMethod: 'email'
+        }));
+        
+        toast.success('Login successful! Session saved.');
         return { success: true };
       } else {
         toast.error(response.message || 'Login failed');
@@ -73,7 +100,8 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user');
-    toast.success('Logged out successfully');
+    localStorage.removeItem('sessionData');
+    toast.success('Logged out successfully. Session cleared.');
   };
 
   const value = {
