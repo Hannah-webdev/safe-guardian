@@ -150,7 +150,7 @@ const SecurityDashboard = () => {
   const formatTimestamp = (timestamp) => {
     try {
       return format(new Date(timestamp), 'MMM dd, yyyy - HH:mm:ss');
-    } catch (error) {
+    } catch {
       return 'Invalid date';
     }
   };

@@ -53,7 +53,6 @@ import SafetyInfo from './SafetyInfo';
 const StudentDashboard = () => {
   const { user, logout } = useAuth();
   const [currentLocation, setCurrentLocation] = useState(null);
-  const [isEmergencyMode, setIsEmergencyMode] = useState(false);
   const [silentMode, setSilentMode] = useState(false);
   const [emergencyDialog, setEmergencyDialog] = useState(false);
   const [emergencyMessage, setEmergencyMessage] = useState('');
@@ -85,8 +84,22 @@ const StudentDashboard = () => {
     }
 
     try {
+      // Get security phone numbers from localStorage or use default
+      const securityContacts = JSON.parse(localStorage.getItem('securityContacts') || '[]');
+      const defaultSecurityNumbers = [
+        '+2348023456789', // Ahmed Ibrahim
+        '+2348023456790', // Fatima Usman
+        '+2348034567890', // Dr. Adewumi
+        '+2348029629012',
+      ];
+
+      const phoneNumbers = securityContacts.length > 0 
+        ? securityContacts.map(contact => contact.phone)
+        : defaultSecurityNumbers;
+
       // Simulate sending emergency alert
       const emergencyData = {
+        id: Date.now(),
         userId: user.id,
         userName: user.name,
         studentId: user.studentId,
@@ -94,6 +107,9 @@ const StudentDashboard = () => {
         message: emergencyMessage || 'Emergency assistance needed',
         timestamp: new Date().toISOString(),
         silent: silentMode,
+        status: 'active',
+        phoneNumbers: phoneNumbers,
+        sentTo: phoneNumbers.map(phone => ({ phone, status: 'sent', timestamp: new Date().toISOString() })),
       };
 
       // Store in localStorage for demo purposes
@@ -101,7 +117,21 @@ const StudentDashboard = () => {
       existingAlerts.push(emergencyData);
       localStorage.setItem('emergencyAlerts', JSON.stringify(existingAlerts));
 
-      toast.success('Emergency alert sent! Security personnel have been notified.');
+      // Simulate sending SMS to security numbers
+      const smsPromises = phoneNumbers.map(async (phone) => {
+        // Simulate SMS sending delay
+        await new Promise(resolve => setTimeout(resolve, Math.random() * 1000 + 500));
+        
+        // In a real app, this would send actual SMS
+        console.log(`SMS sent to ${phone}: Emergency alert from ${user.name} at ${currentLocation.latitude}, ${currentLocation.longitude}`);
+        
+        return { phone, status: 'delivered', timestamp: new Date().toISOString() };
+      });
+
+      // Wait for all SMS to be "sent"
+      await Promise.all(smsPromises);
+
+      toast.success(`Emergency alert sent! Notified ${phoneNumbers.length} security personnel.`);
       setEmergencyDialog(false);
       setEmergencyMessage('');
       
@@ -109,6 +139,11 @@ const StudentDashboard = () => {
       setTimeout(() => {
         toast.info('Security team is on their way to your location.');
       }, 2000);
+
+      // Show location details
+      setTimeout(() => {
+        toast.info(`Location: ${currentLocation.latitude.toFixed(6)}, ${currentLocation.longitude.toFixed(6)}`);
+      }, 3000);
 
     } catch (error) {
       console.error('Error sending emergency alert:', error);

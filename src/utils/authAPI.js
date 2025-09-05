@@ -5,37 +5,73 @@ export const simulateLogin = async (email, password, role) => {
   // Simulate network delay
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  // Mock users for demonstration
+  // Mock users for demonstration - Realistic role-based accounts
   const mockUsers = [
     {
       id: 1,
-      email: "student@fulokoja.edu.ng",
+      email: "john.doe@student.fulokoja.edu.ng",
       password: "password123",
       role: "student",
       name: "John Doe",
       studentId: "SCI20CSC001",
       department: "Computer Science",
+      level: "400",
       phone: "+2348012345678",
     },
     {
       id: 2,
-      email: "security@fulokoja.edu.ng",
-      password: "security123",
-      role: "security",
-      name: "Security Officer",
-      employeeId: "SEC001",
-      department: "Security",
+      email: "mary.smith@student.fulokoja.edu.ng",
+      password: "student456",
+      role: "student",
+      name: "Mary Smith",
+      studentId: "SCI20CSC002",
+      department: "Computer Science",
+      level: "300",
       phone: "+2348012345679",
     },
     {
       id: 3,
+      email: "ahmed.ibrahim@staff.fulokoja.edu.ng",
+      password: "security123",
+      role: "security",
+      name: "Ahmed Ibrahim",
+      employeeId: "SEC001",
+      department: "Security",
+      position: "Senior Security Officer",
+      phone: "+2348023456789",
+    },
+    {
+      id: 4,
+      email: "fatima.usman@staff.fulokoja.edu.ng",
+      password: "security456",
+      role: "security",
+      name: "Fatima Usman",
+      employeeId: "SEC002",
+      department: "Security",
+      position: "Security Supervisor",
+      phone: "+2348023456790",
+    },
+    {
+      id: 5,
       email: "admin@fulokoja.edu.ng",
       password: "admin123",
       role: "admin",
-      name: "System Administrator",
+      name: "Dr. Adewumi S.E.",
       employeeId: "ADM001",
       department: "IT",
-      phone: "+2348012345680",
+      position: "System Administrator",
+      phone: "+2348034567890",
+    },
+    {
+      id: 6,
+      email: "ict.admin@fulokoja.edu.ng",
+      password: "admin456",
+      role: "admin",
+      name: "Prof. Ogunbiyi",
+      employeeId: "ADM002",
+      department: "IT",
+      position: "ICT Administrator",
+      phone: "+2348034567891",
     },
   ];
 
@@ -58,7 +94,7 @@ export const simulateLogin = async (email, password, role) => {
       };
     }
 
-    const { password, ...userWithoutPassword } = user;
+    const { password: _password, ...userWithoutPassword } = user;
     return { success: true, user: userWithoutPassword };
   } else {
     return { success: false, message: "Invalid email or password" };
