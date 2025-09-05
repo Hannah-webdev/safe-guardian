@@ -1,0 +1,342 @@
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import {
+  Container,
+  Paper,
+  TextField,
+  Button,
+  Typography,
+  Box,
+  Alert,
+  InputAdornment,
+  IconButton,
+  Divider,
+  Card,
+  CardContent,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@mui/material';
+import {
+  Email,
+  Lock,
+  Visibility,
+  VisibilityOff,
+  Security,
+  School,
+  AdminPanelSettings,
+} from '@mui/icons-material';
+import { useAuth } from '../../hooks/useAuth';
+
+const Login = () => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    role: 'student',
+  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const { login, loading } = useAuth();
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+    setError('');
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    if (!formData.email || !formData.password) {
+      setError('Please fill in all fields');
+      return;
+    }
+
+    const result = await login(formData.email, formData.password, formData.role);
+    
+    if (result.success) {
+      // Navigate based on user role
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (user.role === 'student') {
+        navigate('/student');
+      } else if (user.role === 'security') {
+        navigate('/security');
+      } else if (user.role === 'admin') {
+        navigate('/admin');
+      }
+    } else {
+      setError(result.message);
+    }
+  };
+
+  const demoAccounts = [
+    {
+      role: 'Student',
+      roleValue: 'student',
+      email: 'student@fulokoja.edu.ng',
+      password: 'password123',
+      icon: <School />,
+      color: '#1976d2',
+    },
+    {
+      role: 'Security',
+      roleValue: 'security',
+      email: 'security@fulokoja.edu.ng',
+      password: 'security123',
+      icon: <Security />,
+      color: '#dc004e',
+    },
+    {
+      role: 'Admin',
+      roleValue: 'admin',
+      email: 'admin@fulokoja.edu.ng',
+      password: 'admin123',
+      icon: <AdminPanelSettings />,
+      color: '#4caf50',
+    },
+  ];
+
+  const handleDemoLogin = (email, password, role) => {
+    setFormData({ email, password, role });
+  };
+
+  return (
+    <Container maxWidth="lg">
+      <Box
+        sx={{
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          py: 4,
+        }}
+      >
+        <Box sx={{ width: '100%', display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+          {/* Login Form */}
+          <Paper
+            elevation={3}
+            sx={{
+              flex: 1,
+              minWidth: 400,
+              p: 4,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}
+          >
+            <Box textAlign="center" mb={4}>
+              <Typography variant="h4" component="h1" gutterBottom color="primary">
+                Safe Guardian
+              </Typography>
+              <Typography variant="h6" color="text.secondary">
+                Federal University, Lokoja
+              </Typography>
+              <Typography variant="body2" color="text.secondary" mt={1}>
+                Personal Students' Safety Application
+              </Typography>
+            </Box>
+
+            {error && (
+              <Alert severity="error" sx={{ mb: 2 }}>
+                {error}
+              </Alert>
+            )}
+
+            <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
+              <TextField
+                fullWidth
+                label="Email Address"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                margin="normal"
+                required
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Email />
+                    </InputAdornment>
+                  ),
+                }}
+                disabled={loading}
+              />
+
+              <FormControl fullWidth margin="normal" required disabled={loading}>
+                <InputLabel>Select Your Role</InputLabel>
+                <Select
+                  name="role"
+                  value={formData.role}
+                  onChange={handleChange}
+                  label="Select Your Role"
+                >
+                  <MenuItem value="student">
+                    <Box display="flex" alignItems="center" gap={1}>
+                      <School />
+                      <Box>
+                        <Typography variant="body1" fontWeight="medium">
+                          Student
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          Login as a student
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </MenuItem>
+                  <MenuItem value="security">
+                    <Box display="flex" alignItems="center" gap={1}>
+                      <Security />
+                      <Box>
+                        <Typography variant="body1" fontWeight="medium">
+                          Security Personnel
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          Login as security staff
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </MenuItem>
+                  <MenuItem value="admin">
+                    <Box display="flex" alignItems="center" gap={1}>
+                      <AdminPanelSettings />
+                      <Box>
+                        <Typography variant="body1" fontWeight="medium">
+                          Administrator
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          Login as system administrator
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </MenuItem>
+                </Select>
+              </FormControl>
+
+              <TextField
+                fullWidth
+                label="Password"
+                name="password"
+                type={showPassword ? 'text' : 'password'}
+                value={formData.password}
+                onChange={handleChange}
+                margin="normal"
+                required
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Lock />
+                    </InputAdornment>
+                  ),
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowPassword(!showPassword)}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                disabled={loading}
+              />
+
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                size="large"
+                sx={{ mt: 3, mb: 2, py: 1.5 }}
+                disabled={loading}
+              >
+                {loading ? 'Signing In...' : 'Sign In'}
+              </Button>
+
+              <Box textAlign="center" mt={2}>
+                <Typography variant="body2">
+                  Don't have an account?{' '}
+                  <Link to="/register" style={{ textDecoration: 'none', color: '#1976d2' }}>
+                    Sign up here
+                  </Link>
+                </Typography>
+              </Box>
+            </Box>
+          </Paper>
+
+          {/* Demo Accounts */}
+          <Box sx={{ flex: 1, minWidth: 300 }}>
+            <Typography variant="h5" gutterBottom textAlign="center" mb={3}>
+              Demo Accounts
+            </Typography>
+            <Typography variant="body2" color="text.secondary" textAlign="center" mb={3}>
+              Click on any account below to auto-fill the login form
+            </Typography>
+            
+            {demoAccounts.map((account, index) => (
+              <Card
+                key={index}
+                sx={{
+                  mb: 2,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  '&:hover': {
+                    transform: 'translateY(-2px)',
+                    boxShadow: 3,
+                  },
+                }}
+                onClick={() => handleDemoLogin(account.email, account.password, account.roleValue)}
+              >
+                <CardContent sx={{ p: 2 }}>
+                  <Box display="flex" alignItems="center" gap={2}>
+                    <Box
+                      sx={{
+                        p: 1,
+                        borderRadius: 1,
+                        backgroundColor: account.color,
+                        color: 'white',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      {account.icon}
+                    </Box>
+                    <Box>
+                      <Typography variant="subtitle1" fontWeight="bold">
+                        {account.role}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {account.email}
+                      </Typography>
+                    </Box>
+                  </Box>
+                </CardContent>
+              </Card>
+            ))}
+
+            <Divider sx={{ my: 3 }} />
+
+            <Box textAlign="center">
+              <Typography variant="h6" gutterBottom>
+                About Safe Guardian
+              </Typography>
+              <Typography variant="body2" color="text.secondary" paragraph>
+                A comprehensive safety application designed specifically for students at Federal University, Lokoja. 
+                Features include real-time location tracking, emergency alerts, and centralized security monitoring.
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Developed by: AIKOYE HANNAH OJOCHEGBE (SCI20CSC021)
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    </Container>
+  );
+};
+
+export default Login;
