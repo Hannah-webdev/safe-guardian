@@ -136,23 +136,29 @@ const Login = () => {
   };
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ px: { xs: 1, sm: 2 } }}>
       <Box
         sx={{
           minHeight: '100vh',
           display: 'flex',
           alignItems: 'center',
-          py: 4,
+          py: { xs: 2, sm: 4 },
         }}
       >
-        <Box sx={{ width: '100%', display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+        <Box sx={{ 
+          width: '100%', 
+          display: 'flex', 
+          gap: { xs: 2, sm: 4 }, 
+          flexWrap: 'wrap',
+          flexDirection: { xs: 'column', md: 'row' }
+        }}>
           {/* Login Form */}
           <Paper
             elevation={3}
             sx={{
               flex: 1,
-              minWidth: 400,
-              p: 4,
+              minWidth: { xs: '100%', sm: 400 },
+              p: { xs: 2, sm: 4 },
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',

@@ -23,9 +23,9 @@ import {
   Chip,
   Alert,
   Fab,
-  SpeedDial,
-  SpeedDialAction,
-  SpeedDialIcon,
+  Avatar,
+  Drawer,
+  Divider,
 } from '@mui/material';
 import {
   Warning,
@@ -33,16 +33,14 @@ import {
   Phone,
   Person,
   Logout,
-  Add,
-  Edit,
-  Delete,
-  Notifications,
   Security,
   History,
   Info,
-  PanTool,
-  VolumeOff,
-  VolumeUp,
+  Menu,
+  CheckCircle,
+  Campaign,
+  Contacts,
+  Settings,
 } from '@mui/icons-material';
 import { useAuth } from '../../hooks/useAuth';
 import { toast } from 'react-toastify';
@@ -53,12 +51,12 @@ import SafetyInfo from './SafetyInfo';
 const StudentDashboard = () => {
   const { user, logout } = useAuth();
   const [currentLocation, setCurrentLocation] = useState(null);
-  const [silentMode, setSilentMode] = useState(false);
   const [emergencyDialog, setEmergencyDialog] = useState(false);
   const [emergencyMessage, setEmergencyMessage] = useState('');
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [speedDialOpen, setSpeedDialOpen] = useState(false);
   const [sessionInfo, setSessionInfo] = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [contacts, setContacts] = useState([]);
 
   // Get current location
   useEffect(() => {
@@ -89,6 +87,12 @@ const StudentDashboard = () => {
         console.error('Error parsing session data:', error);
       }
     }
+  }, []);
+
+  // Load emergency contacts
+  useEffect(() => {
+    const savedContacts = JSON.parse(localStorage.getItem('emergencyContacts') || '[]');
+    setContacts(savedContacts);
   }, []);
 
   const handleEmergencyAlert = async () => {
@@ -128,7 +132,6 @@ const StudentDashboard = () => {
         location: currentLocation,
         message: emergencyMessage || 'Emergency assistance needed',
         timestamp: new Date().toISOString(),
-        silent: silentMode,
         status: 'active',
         phoneNumbers: phoneNumbers,
         sentTo: phoneNumbers.map(phone => ({ phone, status: 'sent', timestamp: new Date().toISOString() })),
@@ -178,259 +181,212 @@ const StudentDashboard = () => {
     handleEmergencyAlert();
   };
 
-  const speedDialActions = [
-    {
-      icon: <Warning />,
-      name: 'Quick SOS',
-      action: handleQuickEmergency,
-      color: '#f44336',
-    },
-    {
-      icon: <Add />,
-      name: 'Add Contact',
-      action: () => setActiveTab('contacts'),
-    },
-    {
-      icon: <History />,
-      name: 'Emergency History',
-      action: () => setActiveTab('history'),
-    },
-    {
-      icon: <Info />,
-      name: 'Safety Info',
-      action: () => setActiveTab('info'),
-    },
-  ];
 
-  const renderDashboard = () => (
-    <Grid container spacing={{ xs: 2, sm: 3 }}>
-      {/* Emergency Status Card */}
-      <Grid item xs={12} md={6}>
-        <Card sx={{ height: '100%' }}>
-          <CardContent>
-            <Box display="flex" alignItems="center" mb={2}>
-              <Warning color="error" sx={{ mr: 1 }} />
-              <Typography variant="h6">Emergency Status</Typography>
-            </Box>
-            <Alert severity="success" sx={{ mb: 2 }}>
-              You are currently safe. No active emergencies.
-            </Alert>
-            <Typography variant="body2" color="text.secondary">
-              Last location update: {currentLocation ? 'Active' : 'Not available'}
-            </Typography>
-            {currentLocation && (
-              <Typography variant="body2" color="text.secondary">
-                Coordinates: {currentLocation.lat.toFixed(6)}, {currentLocation.lng.toFixed(6)}
-              </Typography>
-            )}
-          </CardContent>
-        </Card>
-      </Grid>
+  const renderGuardianAngelUI = () => (
+    <Box
+      sx={{
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
+        color: 'white',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        px: { xs: 2, sm: 4 },
+        py: 4,
+      }}
+    >
+      {/* Main Title */}
+      <Typography
+        variant="h2"
+        component="h1"
+        sx={{
+          fontWeight: 'bold',
+          textAlign: 'center',
+          mb: 2,
+          fontSize: { xs: '2rem', sm: '3rem', md: '4rem' },
+          background: 'linear-gradient(45deg, #ff6b35, #f7931e)',
+          backgroundClip: 'text',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+        }}
+      >
+        Emergency Alert
+      </Typography>
 
-      {/* Quick Actions */}
-      <Grid item xs={12} md={6}>
-        <Card sx={{ height: '100%' }}>
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
-              Quick Actions
-            </Typography>
-            <Box display="flex" flexDirection="column" gap={2}>
-              <Button
-                variant="contained"
-                color="error"
-                size="large"
-                startIcon={<Warning />}
-                onClick={() => setEmergencyDialog(true)}
-                sx={{ 
-                  py: { xs: 1, sm: 1.5 },
-                  fontSize: { xs: '1rem', sm: '1.1rem' },
-                  fontWeight: 'bold',
-                  boxShadow: '0 4px 15px rgba(244, 67, 54, 0.3)',
-                  '&:hover': {
-                    boxShadow: '0 6px 20px rgba(244, 67, 54, 0.4)',
-                    transform: 'translateY(-2px)',
-                  },
-                }}
-              >
-                Send Emergency Alert
-              </Button>
-              <Button
-                variant="contained"
-                color="error"
-                size="large"
-                onClick={handleQuickEmergency}
-                sx={{ 
-                  py: { xs: 1, sm: 1.5 },
-                  fontSize: { xs: '1rem', sm: '1.2rem' },
-                  fontWeight: 'bold',
-                  background: 'linear-gradient(45deg, #f44336, #d32f2f)',
-                  boxShadow: '0 4px 15px rgba(244, 67, 54, 0.4)',
-                  '&:hover': {
-                    background: 'linear-gradient(45deg, #d32f2f, #b71c1c)',
-                    boxShadow: '0 6px 20px rgba(244, 67, 54, 0.5)',
-                    transform: 'translateY(-2px)',
-                  },
-                }}
-              >
-                🚨 IMMEDIATE SOS 🚨
-              </Button>
-              <Button
-                variant="outlined"
-                startIcon={silentMode ? <VolumeOff /> : <VolumeUp />}
-                onClick={() => setSilentMode(!silentMode)}
-                color={silentMode ? 'error' : 'primary'}
-              >
-                {silentMode ? 'Silent Mode ON' : 'Silent Mode OFF'}
-              </Button>
-            </Box>
-          </CardContent>
-        </Card>
-      </Grid>
+      {/* Description */}
+      <Typography
+        variant="h6"
+        sx={{
+          textAlign: 'center',
+          mb: 4,
+          maxWidth: 600,
+          fontSize: { xs: '1rem', sm: '1.2rem' },
+          color: '#e0e0e0',
+          lineHeight: 1.6,
+        }}
+      >
+        In case of an emergency, press the button below. Your location will be shared with campus security immediately. Stay safe.
+      </Typography>
 
-      {/* Location Status */}
-      <Grid item xs={12} md={6}>
-        <Card>
-          <CardContent>
-            <Box display="flex" alignItems="center" mb={2}>
-              <LocationOn color="primary" sx={{ mr: 1 }} />
-              <Typography variant="h6">Location Status</Typography>
-            </Box>
-            <Typography variant="body1" gutterBottom>
-              Current Status: {currentLocation ? 'Tracking Active' : 'Location Disabled'}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Your location is {currentLocation ? 'being tracked' : 'not available'} for emergency response.
-            </Typography>
-            {!currentLocation && (
-              <Button
-                variant="outlined"
-                size="small"
-                sx={{ mt: 1 }}
-                onClick={() => window.location.reload()}
-              >
-                Enable Location
-              </Button>
-            )}
-          </CardContent>
-        </Card>
-      </Grid>
+      {/* Emergency Contacts Status */}
+      <Box sx={{ mb: 4, textAlign: 'center' }}>
+        <Typography variant="body1" sx={{ color: '#b0b0b0', mb: 1 }}>
+          Emergency Contacts: {contacts.length} configured
+        </Typography>
+        {contacts.length === 0 && (
+          <Alert 
+            severity="warning" 
+            sx={{ 
+              maxWidth: 400, 
+              backgroundColor: 'rgba(255, 152, 0, 0.1)',
+              border: '1px solid rgba(255, 152, 0, 0.3)',
+              color: '#ff9800'
+            }}
+          >
+            No emergency contacts found. Add contacts for faster response.
+          </Alert>
+        )}
+      </Box>
 
-             {/* Session Status */}
-       <Grid item xs={12} md={6}>
-         <Card>
-           <CardContent>
-             <Typography variant="h6" gutterBottom>
-               Session Status
-             </Typography>
-             {sessionInfo ? (
-               <Box>
-                 <Typography variant="body2" color="text.secondary" gutterBottom>
-                   Logged in: {new Date(sessionInfo.loginTime).toLocaleString()}
-                 </Typography>
-                 <Typography variant="body2" color="text.secondary" gutterBottom>
-                   Expires: {new Date(sessionInfo.expiryTime).toLocaleString()}
-                 </Typography>
-                 <Chip
-                   label="Session Active"
-                   color="success"
-                   size="small"
-                   sx={{ mt: 1 }}
-                 />
-               </Box>
-             ) : (
-               <Typography variant="body2" color="text.secondary">
-                 No session information available
-               </Typography>
-             )}
-           </CardContent>
-         </Card>
-       </Grid>
+      {/* Main Panic Button */}
+      <Button
+        variant="contained"
+        onClick={handleQuickEmergency}
+        sx={{
+          width: { xs: 200, sm: 250, md: 300 },
+          height: { xs: 200, sm: 250, md: 300 },
+          borderRadius: '50%',
+          backgroundColor: '#ff6b35',
+          background: 'linear-gradient(45deg, #ff6b35, #f7931e)',
+          boxShadow: '0 8px 32px rgba(255, 107, 53, 0.4)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 2,
+          fontSize: { xs: '1.5rem', sm: '2rem' },
+          fontWeight: 'bold',
+          color: 'white',
+          textTransform: 'none',
+          '&:hover': {
+            backgroundColor: '#e55a2b',
+            background: 'linear-gradient(45deg, #e55a2b, #e8821a)',
+            boxShadow: '0 12px 40px rgba(255, 107, 53, 0.6)',
+            transform: 'scale(1.05)',
+          },
+          animation: 'pulse 2s infinite',
+          '@keyframes pulse': {
+            '0%': {
+              boxShadow: '0 8px 32px rgba(255, 107, 53, 0.4)',
+            },
+            '50%': {
+              boxShadow: '0 8px 32px rgba(255, 107, 53, 0.8)',
+            },
+            '100%': {
+              boxShadow: '0 8px 32px rgba(255, 107, 53, 0.4)',
+            },
+          },
+        }}
+      >
+        <Campaign sx={{ fontSize: { xs: '2rem', sm: '3rem' } }} />
+        <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+          PANIC
+        </Typography>
+      </Button>
 
-       {/* Recent Activity */}
-       <Grid item xs={12} md={6}>
-         <Card>
-           <CardContent>
-             <Typography variant="h6" gutterBottom>
-               Recent Activity
-             </Typography>
-             <List dense>
-               <ListItem>
-                 <ListItemIcon>
-                   <Security color="success" />
-                 </ListItemIcon>
-                 <ListItemText
-                   primary="System Check"
-                   secondary="Last checked: 2 minutes ago"
-                 />
-               </ListItem>
-               <ListItem>
-                 <ListItemIcon>
-                   <LocationOn color="primary" />
-                 </ListItemIcon>
-                 <ListItemText
-                   primary="Location Updated"
-                   secondary="GPS coordinates refreshed"
-                 />
-               </ListItem>
-             </List>
-           </CardContent>
-         </Card>
-       </Grid>
-    </Grid>
+      {/* Status Indicators */}
+      <Box
+        sx={{
+          display: 'flex',
+          gap: { xs: 2, sm: 4 },
+          mt: 4,
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+        }}
+      >
+        <Chip
+          icon={<LocationOn />}
+          label={currentLocation ? 'Location Active' : 'Location Disabled'}
+          color={currentLocation ? 'success' : 'error'}
+          variant="outlined"
+          sx={{ 
+            color: currentLocation ? '#4caf50' : '#f44336',
+            borderColor: currentLocation ? '#4caf50' : '#f44336',
+          }}
+        />
+      </Box>
+    </Box>
   );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      {/* App Bar */}
-      <AppBar position="static" color="primary">
+      {/* Dark App Bar */}
+      <AppBar 
+        position="static" 
+        sx={{ 
+          backgroundColor: '#1a1a1a',
+          borderBottom: '1px solid #333',
+        }}
+      >
         <Toolbar sx={{ flexWrap: { xs: 'wrap', sm: 'nowrap' } }}>
-          <Typography 
-            variant="h6" 
-            component="div" 
-            sx={{ 
-              flexGrow: 1,
-              fontSize: { xs: '1rem', sm: '1.25rem' },
-              minWidth: 0
-            }}
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={() => setDrawerOpen(true)}
+            sx={{ mr: 2 }}
           >
-            Safe Guardian - Student Portal
-          </Typography>
+            <Menu />
+          </IconButton>
+          
+          {/* Guardian Angel Logo */}
+          <Box display="flex" alignItems="center" sx={{ mr: 2 }}>
+            <Avatar
+              sx={{
+                backgroundColor: '#ff6b35',
+                width: 32,
+                height: 32,
+                mr: 1,
+              }}
+            >
+              <CheckCircle sx={{ color: 'white' }} />
+            </Avatar>
+            <Typography 
+              variant="h6" 
+              component="div" 
+              sx={{ 
+                flexGrow: 1,
+                fontSize: { xs: '1rem', sm: '1.25rem' },
+                fontWeight: 'bold',
+                color: 'white',
+              }}
+            >
+              Safe Guardian
+            </Typography>
+          </Box>
+
           <Box 
             display="flex" 
             alignItems="center" 
             gap={{ xs: 1, sm: 2 }}
             sx={{ 
               flexWrap: { xs: 'wrap', sm: 'nowrap' },
-              justifyContent: { xs: 'flex-end', sm: 'flex-start' }
+              justifyContent: { xs: 'flex-end', sm: 'flex-start' },
+              ml: 'auto'
             }}
           >
-            <Button
-              variant="contained"
-              color="error"
-              onClick={handleQuickEmergency}
-              sx={{
-                fontWeight: 'bold',
-                fontSize: { xs: '0.8rem', sm: '0.9rem' },
-                px: { xs: 1.5, sm: 2 },
-                py: 1,
-                background: 'linear-gradient(45deg, #f44336, #d32f2f)',
-                boxShadow: '0 2px 10px rgba(244, 67, 54, 0.3)',
-                '&:hover': {
-                  background: 'linear-gradient(45deg, #d32f2f, #b71c1c)',
-                  boxShadow: '0 4px 15px rgba(244, 67, 54, 0.4)',
-                },
-              }}
-            >
-              🚨 SOS
-            </Button>
             <Chip
               icon={<Person />}
-              label={`${user.name} (${user.studentId})`}
+              label={`${user.name}`}
               color="secondary"
               variant="outlined"
               sx={{ 
                 display: { xs: 'none', sm: 'flex' },
-                fontSize: { xs: '0.7rem', sm: '0.8rem' }
+                fontSize: { xs: '0.7rem', sm: '0.8rem' },
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                color: 'white',
+                borderColor: 'rgba(255, 255, 255, 0.3)',
               }}
             />
             <IconButton color="inherit" onClick={logout} size="small">
@@ -440,58 +396,80 @@ const StudentDashboard = () => {
         </Toolbar>
       </AppBar>
 
-      <Container maxWidth="lg" sx={{ mt: { xs: 2, sm: 3 }, mb: { xs: 2, sm: 3 }, px: { xs: 1, sm: 2 } }}>
-        {/* Tab Navigation */}
-        <Box sx={{ mb: 3 }}>
-          <Box 
-            display="flex" 
-            gap={{ xs: 0.5, sm: 1 }} 
-            flexWrap="wrap"
-            sx={{ 
-              justifyContent: { xs: 'center', sm: 'flex-start' },
-              '& .MuiButton-root': {
-                fontSize: { xs: '0.7rem', sm: '0.875rem' },
-                px: { xs: 1, sm: 2 },
-                py: { xs: 0.5, sm: 1 },
-                minWidth: { xs: 'auto', sm: 120 },
-                flex: { xs: '1 1 auto', sm: 'none' },
-                maxWidth: { xs: '48%', sm: 'none' }
-              }
-            }}
-          >
+      {/* Navigation Drawer */}
+      <Drawer
+        anchor="left"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        sx={{
+          '& .MuiDrawer-paper': {
+            backgroundColor: '#1a1a1a',
+            color: 'white',
+            width: 280,
+          },
+        }}
+      >
+        <Box sx={{ p: 2 }}>
+          <Typography variant="h6" sx={{ mb: 2, color: '#ff6b35' }}>
+            Navigation
+          </Typography>
+          <Divider sx={{ backgroundColor: '#333', mb: 2 }} />
+          
+          <List>
             {[
-              { key: 'dashboard', label: 'Dashboard', icon: <Security /> },
-              { key: 'contacts', label: 'Emergency Contacts', icon: <Phone /> },
-              { key: 'history', label: 'History', icon: <History /> },
-              { key: 'info', label: 'Safety Info', icon: <Info /> },
+              { key: 'dashboard', label: 'Emergency Alert', icon: <Campaign /> },
+              { key: 'contacts', label: 'Emergency Contacts', icon: <Contacts /> },
+              { key: 'history', label: 'Alert History', icon: <History /> },
+              { key: 'info', label: 'Safety Information', icon: <Info /> },
             ].map((tab) => (
-              <Button
+              <ListItem
                 key={tab.key}
-                variant={activeTab === tab.key ? 'contained' : 'outlined'}
-                startIcon={tab.icon}
-                onClick={() => setActiveTab(tab.key)}
-                sx={{ mb: 1 }}
+                button
+                onClick={() => {
+                  setActiveTab(tab.key);
+                  setDrawerOpen(false);
+                }}
+                sx={{
+                  backgroundColor: activeTab === tab.key ? 'rgba(255, 107, 53, 0.2)' : 'transparent',
+                  borderRadius: 1,
+                  mb: 0.5,
+                  '&:hover': {
+                    backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                  },
+                }}
               >
-                <Box sx={{ display: { xs: 'none', sm: 'inline' } }}>
-                  {tab.label}
-                </Box>
-                <Box sx={{ display: { xs: 'inline', sm: 'none' } }}>
-                  {tab.label.split(' ')[0]}
-                </Box>
-              </Button>
+                <ListItemIcon sx={{ color: activeTab === tab.key ? '#ff6b35' : 'white' }}>
+                  {tab.icon}
+                </ListItemIcon>
+                <ListItemText 
+                  primary={tab.label}
+                  sx={{ color: activeTab === tab.key ? '#ff6b35' : 'white' }}
+                />
+              </ListItem>
             ))}
-          </Box>
+          </List>
         </Box>
+      </Drawer>
 
-        {/* Content */}
-        {activeTab === 'dashboard' && renderDashboard()}
-        {activeTab === 'contacts' && <EmergencyContacts />}
-        {activeTab === 'history' && <EmergencyHistory />}
-        {activeTab === 'info' && <SafetyInfo />}
-      </Container>
+      {/* Main Content */}
+      {activeTab === 'dashboard' && renderGuardianAngelUI()}
+      {activeTab === 'contacts' && <EmergencyContacts />}
+      {activeTab === 'history' && <EmergencyHistory />}
+      {activeTab === 'info' && <SafetyInfo />}
 
       {/* Emergency Dialog */}
-      <Dialog open={emergencyDialog} onClose={() => setEmergencyDialog(false)} maxWidth="sm" fullWidth>
+      <Dialog 
+        open={emergencyDialog} 
+        onClose={() => setEmergencyDialog(false)} 
+        maxWidth="sm" 
+        fullWidth
+        PaperProps={{
+          sx: {
+            backgroundColor: '#2d2d2d',
+            color: 'white',
+          }
+        }}
+      >
         <DialogTitle>
           <Box display="flex" alignItems="center">
             <Warning color="error" sx={{ mr: 1 }} />
@@ -527,14 +505,6 @@ const StudentDashboard = () => {
             placeholder="Describe your emergency situation..."
             sx={{ mt: 1 }}
           />
-          <Box display="flex" alignItems="center" mt={2}>
-            <Chip
-              icon={silentMode ? <VolumeOff /> : <VolumeUp />}
-              label={silentMode ? 'Silent Mode ON' : 'Silent Mode OFF'}
-              color={silentMode ? 'error' : 'primary'}
-              onClick={() => setSilentMode(!silentMode)}
-            />
-          </Box>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setEmergencyDialog(false)}>Cancel</Button>
@@ -549,68 +519,55 @@ const StudentDashboard = () => {
         </DialogActions>
       </Dialog>
 
-      {/* Emergency SOS Button - Always Visible (Left Side) */}
-      <Fab
-        color="error"
-        aria-label="Emergency SOS"
-        sx={{
-          position: 'fixed',
-          bottom: 80,
-          left: 16,
-          width: { xs: 80, sm: 90 },
-          height: { xs: 80, sm: 90 },
-          fontSize: { xs: '1.1rem', sm: '1.3rem' },
-          fontWeight: 'bold',
-          zIndex: 1000,
-          background: 'linear-gradient(45deg, #f44336, #d32f2f)',
-          boxShadow: '0 6px 25px rgba(244, 67, 54, 0.5)',
-          '&:hover': {
-            boxShadow: '0 8px 30px rgba(244, 67, 54, 0.7)',
-            transform: 'scale(1.1)',
-            background: 'linear-gradient(45deg, #d32f2f, #b71c1c)',
-          },
-          animation: 'pulse 1.5s infinite',
-          '@keyframes pulse': {
-            '0%': {
-              boxShadow: '0 0 0 0 rgba(244, 67, 54, 0.8)',
+      {/* Floating Action Buttons */}
+      <Box sx={{ position: 'fixed', bottom: 16, right: 16, display: 'flex', flexDirection: 'column', gap: 2 }}>
+        {/* Settings Button */}
+        <Fab
+          color="primary"
+          aria-label="settings"
+          onClick={() => setActiveTab('contacts')}
+          sx={{
+            backgroundColor: '#333',
+            '&:hover': {
+              backgroundColor: '#444',
             },
-            '70%': {
-              boxShadow: '0 0 0 15px rgba(244, 67, 54, 0)',
-            },
-            '100%': {
-              boxShadow: '0 0 0 0 rgba(244, 67, 54, 0)',
-            },
-          },
-        }}
-        onClick={handleQuickEmergency}
-      >
-        <Typography variant="h5" sx={{ fontWeight: 'bold', color: 'white' }}>
-          🚨
-        </Typography>
-      </Fab>
+          }}
+        >
+          <Settings />
+        </Fab>
 
-      {/* Speed Dial for Quick Actions */}
-      <SpeedDial
-        ariaLabel="Emergency actions"
-        sx={{ position: 'fixed', bottom: 16, right: 16 }}
-        icon={<SpeedDialIcon />}
-        onClose={() => setSpeedDialOpen(false)}
-        onOpen={() => setSpeedDialOpen(true)}
-        open={speedDialOpen}
-      >
-        {speedDialActions.map((action) => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-            onClick={() => {
-              action.action();
-              setSpeedDialOpen(false);
-            }}
-            sx={{ color: action.color }}
-          />
-        ))}
-      </SpeedDial>
+        {/* Quick Emergency Button */}
+        <Fab
+          color="error"
+          aria-label="quick emergency"
+          onClick={handleQuickEmergency}
+          sx={{
+            backgroundColor: '#ff6b35',
+            background: 'linear-gradient(45deg, #ff6b35, #f7931e)',
+            boxShadow: '0 4px 20px rgba(255, 107, 53, 0.4)',
+            '&:hover': {
+              backgroundColor: '#e55a2b',
+              background: 'linear-gradient(45deg, #e55a2b, #e8821a)',
+              boxShadow: '0 6px 25px rgba(255, 107, 53, 0.6)',
+              transform: 'scale(1.1)',
+            },
+            animation: 'pulse 2s infinite',
+            '@keyframes pulse': {
+              '0%': {
+                boxShadow: '0 4px 20px rgba(255, 107, 53, 0.4)',
+              },
+              '50%': {
+                boxShadow: '0 4px 20px rgba(255, 107, 53, 0.8)',
+              },
+              '100%': {
+                boxShadow: '0 4px 20px rgba(255, 107, 53, 0.4)',
+              },
+            },
+          }}
+        >
+          <Campaign />
+        </Fab>
+      </Box>
     </Box>
   );
 };
