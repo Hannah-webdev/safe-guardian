@@ -186,7 +186,7 @@ const StudentDashboard = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
+        background: 'linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2d3748 100%)',
         color: 'white',
         display: 'flex',
         flexDirection: 'column',
@@ -205,14 +205,14 @@ const StudentDashboard = () => {
           textAlign: 'center',
           mb: 2,
           fontSize: { xs: '2rem', sm: '3rem', md: '4rem' },
-          background: 'linear-gradient(45deg, #ff6b35, #f7931e)',
+          background: 'linear-gradient(45deg, #ff6b35, #ff8c42, #ffa726)',
           backgroundClip: 'text',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
         }}
       >
         Emergency Alert
-      </Typography>
+            </Typography>
 
       {/* Description */}
       <Typography
@@ -222,26 +222,26 @@ const StudentDashboard = () => {
           mb: 4,
           maxWidth: 600,
           fontSize: { xs: '1rem', sm: '1.2rem' },
-          color: '#e0e0e0',
+          color: '#e2e8f0',
           lineHeight: 1.6,
         }}
       >
         In case of an emergency, press the button below. Your location will be shared with campus security immediately. Stay safe.
-      </Typography>
+              </Typography>
 
       {/* Emergency Contacts Status */}
       <Box sx={{ mb: 4, textAlign: 'center' }}>
-        <Typography variant="body1" sx={{ color: '#b0b0b0', mb: 1 }}>
+        <Typography variant="body1" sx={{ color: '#94a3b8', mb: 1 }}>
           Emergency Contacts: {contacts.length} configured
-        </Typography>
+            </Typography>
         {contacts.length === 0 && (
           <Alert 
             severity="warning" 
-            sx={{ 
+                sx={{ 
               maxWidth: 400, 
-              backgroundColor: 'rgba(255, 152, 0, 0.1)',
-              border: '1px solid rgba(255, 152, 0, 0.3)',
-              color: '#ff9800'
+              backgroundColor: 'rgba(255, 107, 53, 0.15)',
+              border: '1px solid rgba(255, 107, 53, 0.4)',
+              color: '#ff6b35'
             }}
           >
             No emergency contacts found. Add contacts for faster response.
@@ -250,29 +250,29 @@ const StudentDashboard = () => {
       </Box>
 
       {/* Main Panic Button */}
-      <Button
-        variant="contained"
-        onClick={handleQuickEmergency}
-        sx={{
+              <Button
+                variant="contained"
+                onClick={handleQuickEmergency}
+                sx={{ 
           width: { xs: 200, sm: 250, md: 300 },
           height: { xs: 200, sm: 250, md: 300 },
           borderRadius: '50%',
           backgroundColor: '#ff6b35',
-          background: 'linear-gradient(45deg, #ff6b35, #f7931e)',
-          boxShadow: '0 8px 32px rgba(255, 107, 53, 0.4)',
+          background: 'linear-gradient(45deg, #ff6b35, #ff8c42, #ffa726)',
+          boxShadow: '0 8px 32px rgba(255, 107, 53, 0.5)',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           gap: 2,
           fontSize: { xs: '1.5rem', sm: '2rem' },
-          fontWeight: 'bold',
+                  fontWeight: 'bold',
           color: 'white',
           textTransform: 'none',
-          '&:hover': {
+                  '&:hover': {
             backgroundColor: '#e55a2b',
-            background: 'linear-gradient(45deg, #e55a2b, #e8821a)',
-            boxShadow: '0 12px 40px rgba(255, 107, 53, 0.6)',
+            background: 'linear-gradient(45deg, #e55a2b, #ff8c42, #ffa726)',
+            boxShadow: '0 12px 40px rgba(255, 107, 53, 0.7)',
             transform: 'scale(1.05)',
           },
           animation: 'pulse 2s infinite',
@@ -286,14 +286,14 @@ const StudentDashboard = () => {
             '100%': {
               boxShadow: '0 8px 32px rgba(255, 107, 53, 0.4)',
             },
-          },
-        }}
-      >
+                  },
+                }}
+              >
         <Campaign sx={{ fontSize: { xs: '2rem', sm: '3rem' } }} />
         <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
           PANIC
         </Typography>
-      </Button>
+              </Button>
 
       {/* Status Indicators */}
       <Box
@@ -305,17 +305,17 @@ const StudentDashboard = () => {
           justifyContent: 'center',
         }}
       >
-        <Chip
+                 <Chip
           icon={<LocationOn />}
           label={currentLocation ? 'Location Active' : 'Location Disabled'}
           color={currentLocation ? 'success' : 'error'}
           variant="outlined"
           sx={{ 
-            color: currentLocation ? '#4caf50' : '#f44336',
-            borderColor: currentLocation ? '#4caf50' : '#f44336',
+            color: currentLocation ? '#10b981' : '#ef4444',
+            borderColor: currentLocation ? '#10b981' : '#ef4444',
           }}
-        />
-      </Box>
+                 />
+               </Box>
     </Box>
   );
 
@@ -325,8 +325,8 @@ const StudentDashboard = () => {
       <AppBar 
         position="static" 
         sx={{ 
-          backgroundColor: '#1a1a1a',
-          borderBottom: '1px solid #333',
+          backgroundColor: '#0f1419',
+          borderBottom: '1px solid #334155',
         }}
       >
         <Toolbar sx={{ flexWrap: { xs: 'wrap', sm: 'nowrap' } }}>
@@ -352,18 +352,18 @@ const StudentDashboard = () => {
             >
               <CheckCircle sx={{ color: 'white' }} />
             </Avatar>
-            <Typography 
-              variant="h6" 
-              component="div" 
-              sx={{ 
-                flexGrow: 1,
-                fontSize: { xs: '1rem', sm: '1.25rem' },
+          <Typography 
+            variant="h6" 
+            component="div" 
+            sx={{ 
+              flexGrow: 1,
+              fontSize: { xs: '1rem', sm: '1.25rem' },
                 fontWeight: 'bold',
                 color: 'white',
-              }}
-            >
+            }}
+          >
               Safe Guardian
-            </Typography>
+          </Typography>
           </Box>
 
           <Box 
@@ -384,9 +384,9 @@ const StudentDashboard = () => {
               sx={{ 
                 display: { xs: 'none', sm: 'flex' },
                 fontSize: { xs: '0.7rem', sm: '0.8rem' },
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                backgroundColor: 'rgba(255, 255, 255, 0.15)',
                 color: 'white',
-                borderColor: 'rgba(255, 255, 255, 0.3)',
+                borderColor: 'rgba(255, 255, 255, 0.4)',
               }}
             />
             <IconButton color="inherit" onClick={logout} size="small">
@@ -401,9 +401,9 @@ const StudentDashboard = () => {
         anchor="left"
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
-        sx={{
+            sx={{ 
           '& .MuiDrawer-paper': {
-            backgroundColor: '#1a1a1a',
+            backgroundColor: '#0f1419',
             color: 'white',
             width: 280,
           },
@@ -413,7 +413,7 @@ const StudentDashboard = () => {
           <Typography variant="h6" sx={{ mb: 2, color: '#ff6b35' }}>
             Navigation
           </Typography>
-          <Divider sx={{ backgroundColor: '#333', mb: 2 }} />
+          <Divider sx={{ backgroundColor: '#334155', mb: 2 }} />
           
           <List>
             {[
@@ -430,7 +430,7 @@ const StudentDashboard = () => {
                   setDrawerOpen(false);
                 }}
                 sx={{
-                  backgroundColor: activeTab === tab.key ? 'rgba(255, 107, 53, 0.2)' : 'transparent',
+                  backgroundColor: activeTab === tab.key ? 'rgba(255, 107, 53, 0.25)' : 'transparent',
                   borderRadius: 1,
                   mb: 0.5,
                   '&:hover': {
@@ -453,9 +453,9 @@ const StudentDashboard = () => {
 
       {/* Main Content */}
       {activeTab === 'dashboard' && renderGuardianAngelUI()}
-      {activeTab === 'contacts' && <EmergencyContacts />}
-      {activeTab === 'history' && <EmergencyHistory />}
-      {activeTab === 'info' && <SafetyInfo />}
+        {activeTab === 'contacts' && <EmergencyContacts />}
+        {activeTab === 'history' && <EmergencyHistory />}
+        {activeTab === 'info' && <SafetyInfo />}
 
       {/* Emergency Dialog */}
       <Dialog 
@@ -465,7 +465,7 @@ const StudentDashboard = () => {
         fullWidth
         PaperProps={{
           sx: {
-            backgroundColor: '#2d2d2d',
+            backgroundColor: '#1a2332',
             color: 'white',
           }
         }}
@@ -527,9 +527,9 @@ const StudentDashboard = () => {
           aria-label="settings"
           onClick={() => setActiveTab('contacts')}
           sx={{
-            backgroundColor: '#333',
+            backgroundColor: '#334155',
             '&:hover': {
-              backgroundColor: '#444',
+              backgroundColor: '#475569',
             },
           }}
         >
@@ -537,36 +537,36 @@ const StudentDashboard = () => {
         </Fab>
 
         {/* Quick Emergency Button */}
-        <Fab
-          color="error"
+      <Fab
+        color="error"
           aria-label="quick emergency"
           onClick={handleQuickEmergency}
-          sx={{
+        sx={{
             backgroundColor: '#ff6b35',
             background: 'linear-gradient(45deg, #ff6b35, #f7931e)',
             boxShadow: '0 4px 20px rgba(255, 107, 53, 0.4)',
-            '&:hover': {
-              backgroundColor: '#e55a2b',
-              background: 'linear-gradient(45deg, #e55a2b, #e8821a)',
-              boxShadow: '0 6px 25px rgba(255, 107, 53, 0.6)',
-              transform: 'scale(1.1)',
-            },
+          '&:hover': {
+            backgroundColor: '#e55a2b',
+            background: 'linear-gradient(45deg, #e55a2b, #ff8c42, #ffa726)',
+            boxShadow: '0 6px 25px rgba(255, 107, 53, 0.7)',
+            transform: 'scale(1.1)',
+          },
             animation: 'pulse 2s infinite',
-            '@keyframes pulse': {
-              '0%': {
+          '@keyframes pulse': {
+            '0%': {
                 boxShadow: '0 4px 20px rgba(255, 107, 53, 0.4)',
-              },
+            },
               '50%': {
                 boxShadow: '0 4px 20px rgba(255, 107, 53, 0.8)',
-              },
-              '100%': {
-                boxShadow: '0 4px 20px rgba(255, 107, 53, 0.4)',
-              },
             },
-          }}
-        >
+            '100%': {
+                boxShadow: '0 4px 20px rgba(255, 107, 53, 0.4)',
+            },
+          },
+        }}
+      >
           <Campaign />
-        </Fab>
+      </Fab>
       </Box>
     </Box>
   );
