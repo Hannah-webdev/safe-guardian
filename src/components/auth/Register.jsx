@@ -155,30 +155,53 @@ const Register = () => {
   };
 
   return (
-    <Container maxWidth="md">
-      <Box
-        sx={{
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          py: 4,
-        }}
-      >
+    <Box
+      sx={{
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #8b5cf6 0%, #a855f7 25%, #c084fc 50%, #7c3aed 100%)',
+        display: 'flex',
+        alignItems: 'center',
+        py: 4,
+      }}
+    >
+      <Container maxWidth="md">
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
         <Paper
-          elevation={3}
+          elevation={8}
           sx={{
             width: '100%',
             p: 4,
+            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(10px)',
+            borderRadius: 3,
+            border: '1px solid rgba(255, 255, 255, 0.2)',
           }}
         >
           <Box textAlign="center" mb={4}>
-            <Typography variant="h4" component="h1" gutterBottom color="primary">
+            <Typography 
+              variant="h4" 
+              component="h1" 
+              gutterBottom 
+              sx={{
+                background: 'linear-gradient(45deg, #8b5cf6, #a855f7)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                fontWeight: 'bold',
+              }}
+            >
               Safe Guardian Registration
             </Typography>
-            <Typography variant="h6" color="text.secondary">
+            <Typography variant="h6" sx={{ color: '#64748b', fontWeight: 500 }}>
               Federal University, Lokoja
             </Typography>
-            <Typography variant="body2" color="text.secondary" mt={1}>
+            <Typography variant="body2" sx={{ color: '#94a3b8', mt: 1 }}>
               Create your account to access the safety application
             </Typography>
           </Box>
@@ -511,8 +534,9 @@ const Register = () => {
             </Box>
           </Box>
         </Paper>
-      </Box>
-    </Container>
+        </Box>
+      </Container>
+    </Box>
   );
 };
 

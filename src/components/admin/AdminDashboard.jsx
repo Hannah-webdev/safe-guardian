@@ -516,19 +516,49 @@ const AdminDashboard = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       {/* App Bar */}
-      <AppBar position="static" color="primary">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+      <AppBar 
+        position="static" 
+        sx={{ 
+          backgroundColor: '#312e81',
+          background: 'linear-gradient(45deg, #312e81, #4338ca, #6366f1)',
+        }}
+      >
+        <Toolbar sx={{ flexWrap: { xs: 'wrap', sm: 'nowrap' } }}>
+          <Typography 
+            variant="h6" 
+            component="div" 
+            sx={{ 
+              flexGrow: 1,
+              fontSize: { xs: '1rem', sm: '1.25rem' },
+              fontWeight: 'bold',
+              color: 'white',
+            }}
+          >
             Safe Guardian - Admin Dashboard
           </Typography>
-          <Box display="flex" alignItems="center" gap={2}>
+          <Box 
+            display="flex" 
+            alignItems="center" 
+            gap={{ xs: 1, sm: 2 }}
+            sx={{ 
+              flexWrap: { xs: 'wrap', sm: 'nowrap' },
+              justifyContent: { xs: 'flex-end', sm: 'flex-start' },
+              ml: 'auto'
+            }}
+          >
             <Chip
               icon={<AdminPanelSettings />}
               label={`${user.name} (Administrator)`}
               color="secondary"
               variant="outlined"
+              sx={{ 
+                backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                color: 'white',
+                borderColor: 'rgba(255, 255, 255, 0.4)',
+                fontSize: { xs: '0.7rem', sm: '0.8rem' },
+              }}
             />
-            <IconButton color="inherit" onClick={logout}>
+            <IconButton color="inherit" onClick={logout} size="small">
               <Logout />
             </IconButton>
           </Box>

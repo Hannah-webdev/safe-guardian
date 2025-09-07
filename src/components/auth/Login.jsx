@@ -136,15 +136,23 @@ const Login = () => {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ px: { xs: 1, sm: 2 } }}>
-      <Box
-        sx={{
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          py: { xs: 2, sm: 4 },
-        }}
-      >
+    <Box
+      sx={{
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #0ea5e9 0%, #06b6d4 25%, #0891b2 50%, #0c4a6e 100%)',
+        display: 'flex',
+        alignItems: 'center',
+        py: { xs: 2, sm: 4 },
+      }}
+    >
+      <Container maxWidth="lg" sx={{ px: { xs: 1, sm: 2 } }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
         <Box sx={{ 
           width: '100%', 
           display: 'flex', 
@@ -154,7 +162,7 @@ const Login = () => {
         }}>
           {/* Login Form */}
           <Paper
-            elevation={3}
+            elevation={8}
             sx={{
               flex: 1,
               minWidth: { xs: '100%', sm: 400 },
@@ -162,16 +170,31 @@ const Login = () => {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
+              backgroundColor: 'rgba(255, 255, 255, 0.95)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: 3,
+              border: '1px solid rgba(255, 255, 255, 0.2)',
             }}
           >
             <Box textAlign="center" mb={4}>
-              <Typography variant="h4" component="h1" gutterBottom color="primary">
+              <Typography 
+                variant="h4" 
+                component="h1" 
+                gutterBottom 
+                sx={{
+                  background: 'linear-gradient(45deg, #0ea5e9, #06b6d4)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  fontWeight: 'bold',
+                }}
+              >
                 Safe Guardian
               </Typography>
-              <Typography variant="h6" color="text.secondary">
+              <Typography variant="h6" sx={{ color: '#64748b', fontWeight: 500 }}>
                 Federal University, Lokoja
               </Typography>
-              <Typography variant="body2" color="text.secondary" mt={1}>
+              <Typography variant="body2" sx={{ color: '#94a3b8', mt: 1 }}>
                 Personal Students' Safety Application
               </Typography>
             </Box>
@@ -304,11 +327,35 @@ const Login = () => {
           </Paper>
 
           {/* Demo Accounts */}
-          <Box sx={{ flex: 1, minWidth: 300 }}>
-            <Typography variant="h5" gutterBottom textAlign="center" mb={3}>
+          <Box sx={{ 
+            flex: 1, 
+            minWidth: 300,
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+            borderRadius: 3,
+            p: 3,
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+          }}>
+            <Typography 
+              variant="h5" 
+              gutterBottom 
+              textAlign="center" 
+              mb={3}
+              sx={{ 
+                color: 'white',
+                fontWeight: 'bold',
+              }}
+            >
               Demo Accounts
             </Typography>
-            <Typography variant="body2" color="text.secondary" textAlign="center" mb={3}>
+            <Typography 
+              variant="body2" 
+              textAlign="center" 
+              mb={3}
+              sx={{ 
+                color: 'rgba(255, 255, 255, 0.8)',
+              }}
+            >
               Click on any account below to auto-fill the login form
             </Typography>
             
@@ -318,10 +365,14 @@ const Login = () => {
                 sx={{
                   mb: 2,
                   cursor: 'pointer',
-                  transition: 'all 0.2s',
+                  transition: 'all 0.3s',
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(5px)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
                   '&:hover': {
-                    transform: 'translateY(-2px)',
-                    boxShadow: 3,
+                    transform: 'translateY(-4px)',
+                    boxShadow: '0 8px 25px rgba(14, 165, 233, 0.3)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
                   },
                 }}
                 onClick={() => handleDemoLogin(account.email, account.password, account.roleValue)}
@@ -370,8 +421,9 @@ const Login = () => {
             </Box>
           </Box>
         </Box>
-      </Box>
-    </Container>
+        </Box>
+      </Container>
+    </Box>
   );
 };
 
