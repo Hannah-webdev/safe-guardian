@@ -3,6 +3,8 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .logo {
@@ -39,4 +41,57 @@
 
 .read-the-docs {
   color: var(--text-disabled);
+}
+
+/* Mobile responsiveness fixes */
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem;
+    max-width: 100%;
+  }
+  
+  .container {
+    padding: 16px;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  .card {
+    margin-bottom: 16px;
+    max-width: 100%;
+    overflow-x: hidden;
+    padding: 1em;
+  }
+  
+  /* Prevent horizontal scrolling on mobile */
+  body {
+    overflow-x: hidden;
+  }
+  
+  html {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 480px) {
+  #root {
+    padding: 0.5rem;
+  }
+  
+  .container {
+    padding: 8px;
+    max-width: 100%;
+  }
+  
+  .card {
+    margin-bottom: 8px;
+    max-width: 100%;
+    padding: 0.5em;
+  }
+  
+  /* Ensure no horizontal overflow on small screens */
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 }

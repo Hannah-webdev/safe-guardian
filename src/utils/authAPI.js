@@ -20,14 +20,14 @@ export const simulateLogin = async (email, password, role) => {
     },
     {
       id: 2,
-      email: "mary.smith@student.fulokoja.edu.ng",
-      password: "student456",
+      email: "sarah.johnson@student.fulokoja.edu.ng",
+      password: "student789",
       role: "student",
-      name: "Mary Smith",
-      studentId: "SCI20CSC002",
+      name: "Sarah Johnson",
+      studentId: "SCI20CSC003",
       department: "Computer Science",
-      level: "300",
-      phone: "+2348012345679",
+      level: "200",
+      phone: "+2348012345680",
     },
     {
       id: 3,
@@ -61,17 +61,6 @@ export const simulateLogin = async (email, password, role) => {
       department: "IT",
       position: "System Administrator",
       phone: "+2348034567890",
-    },
-    {
-      id: 6,
-      email: "ict.admin@fulokoja.edu.ng",
-      password: "admin456",
-      role: "admin",
-      name: "Prof. Ogunbiyi",
-      employeeId: "ADM002",
-      department: "IT",
-      position: "ICT Administrator",
-      phone: "+2348034567891",
     },
   ];
 

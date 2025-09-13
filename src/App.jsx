@@ -84,7 +84,13 @@ function App() {
       <CssBaseline />
       <AuthProvider>
         <Router>
-          <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default' }}>
+          <Box sx={{ 
+            minHeight: '100vh', 
+            backgroundColor: 'background.default',
+            width: '100%',
+            overflowX: 'hidden',
+            maxWidth: '100vw'
+          }}>
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
