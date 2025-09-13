@@ -109,7 +109,7 @@ const Login = () => {
       password: 'admin123',
       icon: <AdminPanelSettings />,
       color: 'var(--admin-color)',
-      name: 'Dr. Adewumi (Admin)',
+      name: 'Prof. Adewumi (Admin)',
     },
   ];
 

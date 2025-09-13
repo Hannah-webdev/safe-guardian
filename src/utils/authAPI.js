@@ -56,7 +56,7 @@ export const simulateLogin = async (email, password, role) => {
       email: "admin@fulokoja.edu.ng",
       password: "admin123",
       role: "admin",
-      name: "Dr. Adewumi S.E.",
+      name: "Prof. Adewumi S.E.",
       employeeId: "ADM001",
       department: "IT",
       position: "System Administrator",
