@@ -618,26 +618,6 @@ const StudentDashboard = () => {
           Test Panic Mode
         </Button>
       )}
-      
-      {/* Panic Mode Exit Button */}
-      {panicMode && (
-        <Button
-          variant="contained"
-          onClick={() => setPanicMode(false)}
-          sx={{
-            position: 'absolute',
-            top: 20,
-            right: 20,
-            backgroundColor: 'var(--panic-accent)',
-            color: 'var(--panic-bg-primary)',
-            '&:hover': {
-              backgroundColor: 'var(--panic-accent-light)',
-            },
-          }}
-        >
-          Exit Panic Mode
-        </Button>
-      )}
       </Box>
     </Box>
   );
