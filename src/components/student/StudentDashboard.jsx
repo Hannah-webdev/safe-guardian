@@ -47,6 +47,7 @@ import { toast } from 'react-toastify';
 import EmergencyContacts from './EmergencyContacts';
 import EmergencyHistory from './EmergencyHistory';
 import SafetyInfo from './SafetyInfo';
+import InformationHub from '../common/InformationHub';
 
 const StudentDashboard = () => {
   const { user, logout } = useAuth();
@@ -421,6 +422,7 @@ const StudentDashboard = () => {
               { key: 'contacts', label: 'Emergency Contacts', icon: <Contacts /> },
               { key: 'history', label: 'Alert History', icon: <History /> },
               { key: 'info', label: 'Safety Information', icon: <Info /> },
+              { key: 'hub', label: 'Information Hub', icon: <Security /> },
             ].map((tab) => (
               <ListItem
                 key={tab.key}
@@ -456,6 +458,7 @@ const StudentDashboard = () => {
         {activeTab === 'contacts' && <EmergencyContacts />}
         {activeTab === 'history' && <EmergencyHistory />}
         {activeTab === 'info' && <SafetyInfo />}
+        {activeTab === 'hub' && <InformationHub />}
 
       {/* Emergency Dialog */}
       <Dialog 

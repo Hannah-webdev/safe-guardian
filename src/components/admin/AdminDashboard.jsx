@@ -55,6 +55,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { toast } from 'react-toastify';
 import { format } from 'date-fns';
 import DataManagement from './DataManagement';
+import InformationHub from '../common/InformationHub';
 
 const AdminDashboard = () => {
   const { user, logout } = useAuth();
@@ -574,6 +575,7 @@ const AdminDashboard = () => {
               { key: 'users', label: 'User Management', icon: <People /> },
               // { key: 'alerts', label: 'Alert Management', icon: <Warning /> },
               { key: 'data', label: 'Data Management', icon: <DataObject /> },
+              { key: 'hub', label: 'Information Hub', icon: <Security /> },
               // { key: 'settings', label: 'System Settings', icon: <Settings /> },
             ].map((tab) => (
               <Button
@@ -606,6 +608,7 @@ const AdminDashboard = () => {
           </Card>
         )}
         {activeTab === 'data' && <DataManagement />}
+        {activeTab === 'hub' && <InformationHub />}
         {activeTab === 'settings' && (
           <Card>
             <CardContent>
