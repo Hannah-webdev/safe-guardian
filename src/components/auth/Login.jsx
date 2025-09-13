@@ -139,7 +139,7 @@ const Login = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 25%, var(--primary-dark) 50%, var(--primary-main) 100%)',
+        background: 'linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-main) 25%, var(--primary-light) 50%, var(--secondary-main) 100%)',
         display: 'flex',
         alignItems: 'center',
         py: { xs: 2, sm: 4 },
@@ -182,7 +182,7 @@ const Login = () => {
                 component="h1" 
                 gutterBottom 
                 sx={{
-                  background: 'linear-gradient(45deg, var(--primary-gradient-start), var(--primary-gradient-end))',
+                  background: 'linear-gradient(45deg, var(--primary-main), var(--primary-light))',
                   backgroundClip: 'text',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',

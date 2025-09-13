@@ -511,8 +511,8 @@ const SecurityDashboard = () => {
       <AppBar 
         position="static" 
         sx={{ 
-          backgroundColor: 'var(--success-dark)',
-          background: 'linear-gradient(45deg, var(--success-dark), var(--success-main), var(--success-light))',
+          backgroundColor: 'var(--secondary-dark)',
+          background: 'linear-gradient(45deg, var(--secondary-dark), var(--secondary-main), var(--secondary-light))',
         }}
       >
         <Toolbar sx={{ flexWrap: { xs: 'wrap', sm: 'nowrap' } }}>

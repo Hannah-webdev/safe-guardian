@@ -18,29 +18,29 @@ import { AuthProvider } from './contexts/AuthContext.jsx';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#1976d2',
-      light: '#42a5f5',
-      dark: '#1565c0',
+      main: '#1e3a8a',
+      light: '#3b82f6',
+      dark: '#1e40af',
     },
     secondary: {
-      main: '#dc004e',
-      light: '#ff5983',
-      dark: '#9a0036',
+      main: '#0f766e',
+      light: '#14b8a6',
+      dark: '#0d9488',
     },
     error: {
-      main: '#f44336',
+      main: '#dc2626',
     },
     warning: {
-      main: '#ff9800',
+      main: '#d97706',
     },
     success: {
-      main: '#4caf50',
+      main: '#059669',
     },
     info: {
-      main: '#2196f3',
+      main: '#2563eb',
     },
     background: {
-      default: '#f5f5f5',
+      default: '#f8fafc',
       paper: '#ffffff',
     },
   },

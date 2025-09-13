@@ -519,8 +519,8 @@ const AdminDashboard = () => {
       <AppBar 
         position="static" 
         sx={{ 
-          backgroundColor: 'var(--primary-dark)',
-          background: 'linear-gradient(45deg, var(--primary-dark), var(--primary-main), var(--primary-light))',
+          backgroundColor: 'var(--accent-purple-dark)',
+          background: 'linear-gradient(45deg, var(--accent-purple-dark), var(--accent-purple), var(--accent-purple-light))',
         }}
       >
         <Toolbar sx={{ flexWrap: { xs: 'wrap', sm: 'nowrap' } }}>

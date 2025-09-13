@@ -1,66 +1,75 @@
 /* Safe Guardian - Personal Students' Safety Application */
 /* Federal University, Lokoja */
 
-/* Unified Color Palette */
+/* Professional Color Palette - Safe Guardian */
 :root {
-  /* Primary Colors - Blue Theme */
-  --primary-main: #1976d2;
-  --primary-light: #42a5f5;
-  --primary-dark: #1565c0;
-  --primary-gradient-start: #0ea5e9;
-  --primary-gradient-end: #06b6d4;
+  /* Primary Colors - Deep Navy & Steel Blue */
+  --primary-main: #1e3a8a;
+  --primary-light: #3b82f6;
+  --primary-dark: #1e40af;
+  --primary-gradient-start: #1e40af;
+  --primary-gradient-end: #3b82f6;
   
-  /* Secondary Colors - Red/Pink Theme */
-  --secondary-main: #dc004e;
-  --secondary-light: #ff5983;
-  --secondary-dark: #9a0036;
+  /* Secondary Colors - Sophisticated Teal */
+  --secondary-main: #0f766e;
+  --secondary-light: #14b8a6;
+  --secondary-dark: #0d9488;
   
-  /* Status Colors */
-  --success-main: #4caf50;
-  --success-light: #81c784;
-  --success-dark: #388e3c;
+  /* Status Colors - Professional & Distinct */
+  --success-main: #059669;
+  --success-light: #10b981;
+  --success-dark: #047857;
   
-  --warning-main: #ff9800;
-  --warning-light: #ffb74d;
-  --warning-dark: #f57c00;
+  --warning-main: #d97706;
+  --warning-light: #f59e0b;
+  --warning-dark: #b45309;
   
-  --error-main: #f44336;
-  --error-light: #e57373;
-  --error-dark: #d32f2f;
+  --error-main: #dc2626;
+  --error-light: #ef4444;
+  --error-dark: #b91c1c;
   
-  --info-main: #2196f3;
-  --info-light: #64b5f6;
-  --info-dark: #1976d2;
+  --info-main: #2563eb;
+  --info-light: #3b82f6;
+  --info-dark: #1d4ed8;
   
-  /* Neutral Colors */
-  --background-default: #f5f5f5;
+  /* Neutral Colors - Sophisticated Grays */
+  --background-default: #f8fafc;
   --background-paper: #ffffff;
-  --background-dark: #121212;
-  --background-card-dark: #1e1e1e;
+  --background-dark: #0f172a;
+  --background-card-dark: #1e293b;
   
-  --text-primary: #333333;
+  --text-primary: #1e293b;
   --text-secondary: #64748b;
   --text-disabled: #94a3b8;
   --text-white: #ffffff;
   
-  --border-light: rgba(255, 255, 255, 0.2);
-  --border-medium: rgba(0, 0, 0, 0.1);
-  --border-dark: rgba(0, 0, 0, 0.2);
+  --border-light: rgba(255, 255, 255, 0.1);
+  --border-medium: rgba(148, 163, 184, 0.2);
+  --border-dark: rgba(30, 41, 59, 0.2);
   
-  /* Shadow Colors */
-  --shadow-light: rgba(0, 0, 0, 0.1);
-  --shadow-medium: rgba(0, 0, 0, 0.15);
-  --shadow-dark: rgba(0, 0, 0, 0.2);
+  /* Shadow Colors - Subtle & Professional */
+  --shadow-light: rgba(15, 23, 42, 0.05);
+  --shadow-medium: rgba(15, 23, 42, 0.1);
+  --shadow-dark: rgba(15, 23, 42, 0.15);
   
-  /* Emergency Colors */
-  --emergency-primary: #f44336;
-  --emergency-secondary: #d32f2f;
-  --emergency-tertiary: #b71c1c;
+  /* Emergency Colors - Urgent but Professional */
+  --emergency-primary: #dc2626;
+  --emergency-secondary: #b91c1c;
+  --emergency-tertiary: #991b1b;
   
-  /* Role-specific Colors */
-  --student-color: #1976d2;
-  --security-color: #dc004e;
-  --admin-color: #4caf50;
+  /* Role-specific Colors - Distinct & Professional */
+  --student-color: #1e40af;
+  --security-color: #0f766e;
+  --admin-color: #7c3aed;
+  
+  /* Accent Colors - Unique & Modern */
+  --accent-purple: #7c3aed;
+  --accent-purple-light: #8b5cf6;
+  --accent-purple-dark: #6d28d9;
+  
+  --accent-emerald: #10b981;
+  --accent-emerald-light: #34d399;
+  --accent-emerald-dark: #059669;
 }
 
 * {
@@ -101,15 +110,15 @@ body {
 @keyframes pulse {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
   }
   70% {
     transform: scale(1.05);
-    box-shadow: 0 0 0 10px rgba(244, 67, 54, 0);
+    box-shadow: 0 0 0 10px rgba(220, 38, 38, 0);
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0);
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
   }
 }
 
@@ -190,13 +199,13 @@ body {
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
 }
 
 .btn-emergency:hover {
   background: linear-gradient(45deg, var(--emergency-secondary), var(--emergency-tertiary));
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
 }
 
 /* Status badge styles */

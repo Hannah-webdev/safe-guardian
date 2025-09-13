@@ -158,7 +158,7 @@ const Register = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, var(--secondary-main) 0%, var(--secondary-light) 25%, var(--primary-light) 50%, var(--primary-main) 100%)',
+        background: 'linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-main) 25%, var(--secondary-main) 50%, var(--secondary-light) 100%)',
         display: 'flex',
         alignItems: 'center',
         py: 4,

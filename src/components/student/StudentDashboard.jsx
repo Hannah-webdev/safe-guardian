@@ -186,7 +186,7 @@ const StudentDashboard = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, var(--background-dark) 0%, var(--background-card-dark) 50%, var(--text-secondary) 100%)',
+        background: 'linear-gradient(135deg, var(--background-dark) 0%, var(--primary-dark) 50%, var(--primary-main) 100%)',
         color: 'white',
         display: 'flex',
         flexDirection: 'column',
@@ -205,7 +205,7 @@ const StudentDashboard = () => {
           textAlign: 'center',
           mb: 2,
           fontSize: { xs: '2rem', sm: '3rem', md: '4rem' },
-          background: 'linear-gradient(45deg, var(--warning-main), var(--warning-light), var(--warning-dark))',
+          background: 'linear-gradient(45deg, var(--accent-emerald), var(--accent-emerald-light), var(--accent-emerald-dark))',
           backgroundClip: 'text',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
@@ -241,7 +241,7 @@ const StudentDashboard = () => {
               maxWidth: 400, 
               backgroundColor: 'rgba(255, 107, 53, 0.15)',
               border: '1px solid rgba(255, 107, 53, 0.4)',
-              color: 'var(--warning-main)'
+              color: 'var(--accent-emerald)'
             }}
           >
             No emergency contacts found. Add contacts for faster response.
@@ -257,8 +257,8 @@ const StudentDashboard = () => {
           width: { xs: 200, sm: 250, md: 300 },
           height: { xs: 200, sm: 250, md: 300 },
           borderRadius: '50%',
-          backgroundColor: 'var(--warning-main)',
-          background: 'linear-gradient(45deg, var(--warning-main), var(--warning-light), var(--warning-dark))',
+          backgroundColor: 'var(--accent-emerald)',
+          background: 'linear-gradient(45deg, var(--accent-emerald), var(--accent-emerald-light), var(--accent-emerald-dark))',
           boxShadow: '0 8px 32px rgba(255, 107, 53, 0.5)',
           display: 'flex',
           flexDirection: 'column',
@@ -270,8 +270,8 @@ const StudentDashboard = () => {
           color: 'white',
           textTransform: 'none',
                   '&:hover': {
-            backgroundColor: 'var(--warning-dark)',
-            background: 'linear-gradient(45deg, var(--warning-dark), var(--warning-light), var(--warning-dark))',
+            backgroundColor: 'var(--accent-emerald-dark)',
+            background: 'linear-gradient(45deg, var(--accent-emerald-dark), var(--accent-emerald-light), var(--accent-emerald-dark))',
             boxShadow: '0 12px 40px rgba(255, 107, 53, 0.7)',
             transform: 'scale(1.05)',
           },
@@ -344,7 +344,7 @@ const StudentDashboard = () => {
           <Box display="flex" alignItems="center" sx={{ mr: 2 }}>
             {/* <Avatar
               sx={{
-                backgroundColor: 'var(--warning-main)',
+                backgroundColor: 'var(--accent-emerald)',
                 width: 32,
                 height: 32,
                 mr: 1,
@@ -542,12 +542,12 @@ const StudentDashboard = () => {
           aria-label="quick emergency"
           onClick={handleQuickEmergency}
         sx={{
-            backgroundColor: 'var(--warning-main)',
-            background: 'linear-gradient(45deg, var(--warning-main), var(--warning-light))',
+            backgroundColor: 'var(--accent-emerald)',
+            background: 'linear-gradient(45deg, var(--accent-emerald), var(--accent-emerald-light))',
             boxShadow: '0 4px 20px rgba(255, 107, 53, 0.4)',
           '&:hover': {
-            backgroundColor: 'var(--warning-dark)',
-            background: 'linear-gradient(45deg, var(--warning-dark), var(--warning-light), var(--warning-dark))',
+            backgroundColor: 'var(--accent-emerald-dark)',
+            background: 'linear-gradient(45deg, var(--accent-emerald-dark), var(--accent-emerald-light), var(--accent-emerald-dark))',
             boxShadow: '0 6px 25px rgba(255, 107, 53, 0.7)',
             transform: 'scale(1.1)',
           },
