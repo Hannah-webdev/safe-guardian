@@ -169,14 +169,14 @@ const DataManagement = () => {
         Data Management
       </Typography>
       
-      <Alert severity="info" sx={{ mb: 3 }}>
+      {/* <Alert severity="info" sx={{ mb: 3 }}>
         This section allows you to generate sample data for testing and demonstration purposes, 
         and export data to CSV files for analysis or backup.
-      </Alert>
+      </Alert> */}
 
       <Grid container spacing={3}>
         {/* Data Generation */}
-        <Grid item xs={12} md={6}>
+        {/* <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
               <Typography variant="h6" gutterBottom>
@@ -208,7 +208,7 @@ const DataManagement = () => {
               </Box>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid> */}
 
         {/* Data Statistics */}
         <Grid item xs={12} md={6}>
@@ -386,7 +386,7 @@ const DataManagement = () => {
         </Grid>
 
         {/* Data Description */}
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Card>
             <CardContent>
               <Typography variant="h6" gutterBottom>
@@ -484,7 +484,7 @@ const DataManagement = () => {
               </Grid>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid> */}
       </Grid>
 
       {/* Preview Dialog */}

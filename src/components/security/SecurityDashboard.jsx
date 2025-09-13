@@ -381,14 +381,14 @@ const SecurityDashboard = () => {
               Quick Actions
             </Typography>
             <Box display="flex" flexDirection="column" gap={2}>
-              <Button
+              {/* <Button
                 variant="contained"
                 color="primary"
                 startIcon={<Map />}
                 fullWidth
               >
                 View Campus Map
-              </Button>
+              </Button> */}
               <Button
                 variant="outlined"
                 startIcon={<Phone />}
@@ -488,11 +488,11 @@ const SecurityDashboard = () => {
       action: () => generateSampleAlerts(),
       color: '#f44336',
     },
-    {
-      icon: <Map />,
-      name: 'View Map',
-      action: () => setActiveTab('map'),
-    },
+    // {
+    //   icon: <Map />,
+    //   name: 'View Map',
+    //   action: () => setActiveTab('map'),
+    // },
     {
       icon: <History />,
       name: 'Alert History',
@@ -562,9 +562,9 @@ const SecurityDashboard = () => {
         <Box sx={{ mb: 3 }}>
           <Box display="flex" gap={1} flexWrap="wrap">
             {[
-              { key: 'dashboard', label: 'Dashboard', icon: <Security /> },
-              { key: 'history', label: 'Alert History', icon: <History /> },
-              { key: 'map', label: 'Campus Map', icon: <Map /> },
+              // { key: 'dashboard', label: 'Dashboard', icon: <Security /> },
+              // { key: 'history', label: 'Alert History', icon: <History /> },
+              // { key: 'map', label: 'Campus Map', icon: <Map /> },
             ].map((tab) => (
               <Button
                 key={tab.key}

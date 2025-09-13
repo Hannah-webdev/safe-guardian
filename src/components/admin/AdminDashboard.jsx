@@ -572,9 +572,9 @@ const AdminDashboard = () => {
             {[
               { key: 'overview', label: 'System Overview', icon: <Assessment /> },
               { key: 'users', label: 'User Management', icon: <People /> },
-              { key: 'alerts', label: 'Alert Management', icon: <Warning /> },
+              // { key: 'alerts', label: 'Alert Management', icon: <Warning /> },
               { key: 'data', label: 'Data Management', icon: <DataObject /> },
-              { key: 'settings', label: 'System Settings', icon: <Settings /> },
+              // { key: 'settings', label: 'System Settings', icon: <Settings /> },
             ].map((tab) => (
               <Button
                 key={tab.key}

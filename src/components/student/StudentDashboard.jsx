@@ -342,7 +342,7 @@ const StudentDashboard = () => {
           
           {/* Guardian Angel Logo */}
           <Box display="flex" alignItems="center" sx={{ mr: 2 }}>
-            <Avatar
+            {/* <Avatar
               sx={{
                 backgroundColor: '#ff6b35',
                 width: 32,
@@ -351,7 +351,7 @@ const StudentDashboard = () => {
               }}
             >
               <CheckCircle sx={{ color: 'white' }} />
-            </Avatar>
+            </Avatar> */}
           <Typography 
             variant="h6" 
             component="div" 
@@ -537,7 +537,7 @@ const StudentDashboard = () => {
         </Fab>
 
         {/* Quick Emergency Button */}
-      <Fab
+      {/* <Fab
         color="error"
           aria-label="quick emergency"
           onClick={handleQuickEmergency}
@@ -566,7 +566,7 @@ const StudentDashboard = () => {
         }}
       >
           <Campaign />
-      </Fab>
+      </Fab> */}
       </Box>
     </Box>
   );
