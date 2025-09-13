@@ -1,6 +1,68 @@
 /* Safe Guardian - Personal Students' Safety Application */
 /* Federal University, Lokoja */
 
+/* Unified Color Palette */
+:root {
+  /* Primary Colors - Blue Theme */
+  --primary-main: #1976d2;
+  --primary-light: #42a5f5;
+  --primary-dark: #1565c0;
+  --primary-gradient-start: #0ea5e9;
+  --primary-gradient-end: #06b6d4;
+  
+  /* Secondary Colors - Red/Pink Theme */
+  --secondary-main: #dc004e;
+  --secondary-light: #ff5983;
+  --secondary-dark: #9a0036;
+  
+  /* Status Colors */
+  --success-main: #4caf50;
+  --success-light: #81c784;
+  --success-dark: #388e3c;
+  
+  --warning-main: #ff9800;
+  --warning-light: #ffb74d;
+  --warning-dark: #f57c00;
+  
+  --error-main: #f44336;
+  --error-light: #e57373;
+  --error-dark: #d32f2f;
+  
+  --info-main: #2196f3;
+  --info-light: #64b5f6;
+  --info-dark: #1976d2;
+  
+  /* Neutral Colors */
+  --background-default: #f5f5f5;
+  --background-paper: #ffffff;
+  --background-dark: #121212;
+  --background-card-dark: #1e1e1e;
+  
+  --text-primary: #333333;
+  --text-secondary: #64748b;
+  --text-disabled: #94a3b8;
+  --text-white: #ffffff;
+  
+  --border-light: rgba(255, 255, 255, 0.2);
+  --border-medium: rgba(0, 0, 0, 0.1);
+  --border-dark: rgba(0, 0, 0, 0.2);
+  
+  /* Shadow Colors */
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-medium: rgba(0, 0, 0, 0.15);
+  --shadow-dark: rgba(0, 0, 0, 0.2);
+  
+  /* Emergency Colors */
+  --emergency-primary: #f44336;
+  --emergency-secondary: #d32f2f;
+  --emergency-tertiary: #b71c1c;
+  
+  /* Role-specific Colors */
+  --student-color: #1976d2;
+  --security-color: #dc004e;
+  --admin-color: #4caf50;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -11,8 +73,8 @@ body {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f5f5;
-  color: #333;
+  background-color: var(--background-default);
+  color: var(--text-primary);
   line-height: 1.6;
 }
 
@@ -22,17 +84,17 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--background-default);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
+  background: var(--text-disabled);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+  background: var(--text-secondary);
 }
 
 /* Emergency button animations */
@@ -93,19 +155,19 @@ body {
 
 /* Emergency status indicators */
 .status-pending {
-  color: #ff9800;
+  color: var(--warning-main);
 }
 
 .status-in-progress {
-  color: #2196f3;
+  color: var(--info-main);
 }
 
 .status-resolved {
-  color: #4caf50;
+  color: var(--success-main);
 }
 
 .status-cancelled {
-  color: #f44336;
+  color: var(--error-main);
 }
 
 /* Map container styles */
@@ -114,13 +176,13 @@ body {
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px var(--shadow-light);
 }
 
 /* Custom button styles */
 .btn-emergency {
-  background: linear-gradient(45deg, #f44336, #d32f2f);
-  color: white;
+  background: linear-gradient(45deg, var(--emergency-primary), var(--emergency-secondary));
+  color: var(--text-white);
   border: none;
   padding: 12px 24px;
   border-radius: 8px;
@@ -132,15 +194,15 @@ body {
 }
 
 .btn-emergency:hover {
-  background: linear-gradient(45deg, #d32f2f, #b71c1c);
+  background: linear-gradient(45deg, var(--emergency-secondary), var(--emergency-tertiary));
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
 }
 
 /* Status badge styles */
 .badge-success {
-  background-color: #4caf50;
-  color: white;
+  background-color: var(--success-main);
+  color: var(--text-white);
   padding: 4px 8px;
   border-radius: 12px;
   font-size: 0.75rem;
@@ -148,8 +210,8 @@ body {
 }
 
 .badge-warning {
-  background-color: #ff9800;
-  color: white;
+  background-color: var(--warning-main);
+  color: var(--text-white);
   padding: 4px 8px;
   border-radius: 12px;
   font-size: 0.75rem;
@@ -157,8 +219,8 @@ body {
 }
 
 .badge-error {
-  background-color: #f44336;
-  color: white;
+  background-color: var(--error-main);
+  color: var(--text-white);
   padding: 4px 8px;
   border-radius: 12px;
   font-size: 0.75rem;
@@ -166,8 +228,8 @@ body {
 }
 
 .badge-info {
-  background-color: #2196f3;
-  color: white;
+  background-color: var(--info-main);
+  color: var(--text-white);
   padding: 4px 8px;
   border-radius: 12px;
   font-size: 0.75rem;
@@ -255,14 +317,20 @@ textarea:focus {
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
+  :root {
+    --background-default: var(--background-dark);
+    --background-paper: var(--background-card-dark);
+    --text-primary: var(--text-white);
+  }
+  
   body {
-    background-color: #121212;
-    color: #ffffff;
+    background-color: var(--background-dark);
+    color: var(--text-white);
   }
   
   .card {
-    background-color: #1e1e1e;
-    color: #ffffff;
+    background-color: var(--background-card-dark);
+    color: var(--text-white);
   }
 }
 
@@ -317,15 +385,15 @@ textarea:focus {
 
 /* Safe Guardian specific styles */
 .safe-guardian-header {
-  background: linear-gradient(135deg, #1976d2, #42a5f5);
-  color: white;
+  background: linear-gradient(135deg, var(--primary-main), var(--primary-light));
+  color: var(--text-white);
   padding: 20px 0;
   text-align: center;
 }
 
 .safe-guardian-footer {
-  background-color: #1976d2;
-  color: white;
+  background-color: var(--primary-main);
+  color: var(--text-white);
   padding: 20px 0;
   text-align: center;
   margin-top: 40px;
@@ -335,8 +403,8 @@ textarea:focus {
   position: fixed;
   top: 20px;
   right: 20px;
-  background-color: #f44336;
-  color: white;
+  background-color: var(--emergency-primary);
+  color: var(--text-white);
   padding: 8px 16px;
   border-radius: 20px;
   font-weight: 600;
@@ -366,17 +434,17 @@ textarea:focus {
 }
 
 .Toastify__toast--success {
-  background-color: #4caf50;
+  background-color: var(--success-main);
 }
 
 .Toastify__toast--error {
-  background-color: #f44336;
+  background-color: var(--error-main);
 }
 
 .Toastify__toast--warning {
-  background-color: #ff9800;
+  background-color: var(--warning-main);
 }
 
 .Toastify__toast--info {
-  background-color: #2196f3;
+  background-color: var(--info-main);
 }

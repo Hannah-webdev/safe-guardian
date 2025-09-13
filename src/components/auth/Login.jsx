@@ -81,7 +81,7 @@ const Login = () => {
       email: 'john.doe@student.fulokoja.edu.ng',
       password: 'password123',
       icon: <School />,
-      color: '#1976d2',
+      color: 'var(--student-color)',
       name: 'John Doe (Student)',
     },
     {
@@ -90,7 +90,7 @@ const Login = () => {
       email: 'mary.smith@student.fulokoja.edu.ng',
       password: 'student456',
       icon: <School />,
-      color: '#1976d2',
+      color: 'var(--student-color)',
       name: 'Mary Smith (Student)',
     },
     {
@@ -99,7 +99,7 @@ const Login = () => {
       email: 'ahmed.ibrahim@staff.fulokoja.edu.ng',
       password: 'security123',
       icon: <Security />,
-      color: '#dc004e',
+      color: 'var(--security-color)',
       name: 'Ahmed Ibrahim (Security)',
     },
     {
@@ -108,7 +108,7 @@ const Login = () => {
       email: 'fatima.usman@staff.fulokoja.edu.ng',
       password: 'security456',
       icon: <Security />,
-      color: '#dc004e',
+      color: 'var(--security-color)',
       name: 'Fatima Usman (Security)',
     },
     {
@@ -117,7 +117,7 @@ const Login = () => {
       email: 'admin@fulokoja.edu.ng',
       password: 'admin123',
       icon: <AdminPanelSettings />,
-      color: '#4caf50',
+      color: 'var(--admin-color)',
       name: 'Dr. Adewumi (Admin)',
     },
     {
@@ -126,7 +126,7 @@ const Login = () => {
       email: 'ict.admin@fulokoja.edu.ng',
       password: 'admin456',
       icon: <AdminPanelSettings />,
-      color: '#4caf50',
+      color: 'var(--admin-color)',
       name: 'Prof. Ogunbiyi (Admin)',
     },
   ];
@@ -139,7 +139,7 @@ const Login = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #0ea5e9 0%, #06b6d4 25%, #0891b2 50%, #0c4a6e 100%)',
+        background: 'linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 25%, var(--primary-dark) 50%, var(--primary-main) 100%)',
         display: 'flex',
         alignItems: 'center',
         py: { xs: 2, sm: 4 },
@@ -182,7 +182,7 @@ const Login = () => {
                 component="h1" 
                 gutterBottom 
                 sx={{
-                  background: 'linear-gradient(45deg, #0ea5e9, #06b6d4)',
+                  background: 'linear-gradient(45deg, var(--primary-gradient-start), var(--primary-gradient-end))',
                   backgroundClip: 'text',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
@@ -191,10 +191,10 @@ const Login = () => {
               >
                 Safe Guardian
               </Typography>
-              <Typography variant="h6" sx={{ color: '#64748b', fontWeight: 500 }}>
+              <Typography variant="h6" sx={{ color: 'var(--text-secondary)', fontWeight: 500 }}>
                 Federal University, Lokoja
               </Typography>
-              <Typography variant="body2" sx={{ color: '#94a3b8', mt: 1 }}>
+              <Typography variant="body2" sx={{ color: 'var(--text-disabled)', mt: 1 }}>
                 Personal Students' Safety Application
               </Typography>
             </Box>
@@ -318,7 +318,7 @@ const Login = () => {
               <Box textAlign="center" mt={2}>
                 <Typography variant="body2">
                   Don't have an account?{' '}
-                  <Link to="/register" style={{ textDecoration: 'none', color: '#1976d2' }}>
+                  <Link to="/register" style={{ textDecoration: 'none', color: 'var(--primary-main)' }}>
                     Sign up here
                   </Link>
                 </Typography>
@@ -334,7 +334,7 @@ const Login = () => {
             backdropFilter: 'blur(10px)',
             borderRadius: 3,
             p: 3,
-            border: '1px solid rgba(255, 255, 255, 0.2)',
+            border: '1px solid var(--border-light)',
           }}>
             <Typography 
               variant="h5" 
@@ -368,7 +368,7 @@ const Login = () => {
                   transition: 'all 0.3s',
                   backgroundColor: 'rgba(255, 255, 255, 0.1)',
                   backdropFilter: 'blur(5px)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  border: '1px solid var(--border-light)',
                   '&:hover': {
                     transform: 'translateY(-4px)',
                     boxShadow: '0 8px 25px rgba(14, 165, 233, 0.3)',

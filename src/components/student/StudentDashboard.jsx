@@ -186,7 +186,7 @@ const StudentDashboard = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2d3748 100%)',
+        background: 'linear-gradient(135deg, var(--background-dark) 0%, var(--background-card-dark) 50%, var(--text-secondary) 100%)',
         color: 'white',
         display: 'flex',
         flexDirection: 'column',
@@ -205,7 +205,7 @@ const StudentDashboard = () => {
           textAlign: 'center',
           mb: 2,
           fontSize: { xs: '2rem', sm: '3rem', md: '4rem' },
-          background: 'linear-gradient(45deg, #ff6b35, #ff8c42, #ffa726)',
+          background: 'linear-gradient(45deg, var(--warning-main), var(--warning-light), var(--warning-dark))',
           backgroundClip: 'text',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
@@ -222,7 +222,7 @@ const StudentDashboard = () => {
           mb: 4,
           maxWidth: 600,
           fontSize: { xs: '1rem', sm: '1.2rem' },
-          color: '#e2e8f0',
+          color: 'var(--text-white)',
           lineHeight: 1.6,
         }}
       >
@@ -231,7 +231,7 @@ const StudentDashboard = () => {
 
       {/* Emergency Contacts Status */}
       <Box sx={{ mb: 4, textAlign: 'center' }}>
-        <Typography variant="body1" sx={{ color: '#94a3b8', mb: 1 }}>
+        <Typography variant="body1" sx={{ color: 'var(--text-disabled)', mb: 1 }}>
           Emergency Contacts: {contacts.length} configured
             </Typography>
         {contacts.length === 0 && (
@@ -241,7 +241,7 @@ const StudentDashboard = () => {
               maxWidth: 400, 
               backgroundColor: 'rgba(255, 107, 53, 0.15)',
               border: '1px solid rgba(255, 107, 53, 0.4)',
-              color: '#ff6b35'
+              color: 'var(--warning-main)'
             }}
           >
             No emergency contacts found. Add contacts for faster response.
@@ -257,8 +257,8 @@ const StudentDashboard = () => {
           width: { xs: 200, sm: 250, md: 300 },
           height: { xs: 200, sm: 250, md: 300 },
           borderRadius: '50%',
-          backgroundColor: '#ff6b35',
-          background: 'linear-gradient(45deg, #ff6b35, #ff8c42, #ffa726)',
+          backgroundColor: 'var(--warning-main)',
+          background: 'linear-gradient(45deg, var(--warning-main), var(--warning-light), var(--warning-dark))',
           boxShadow: '0 8px 32px rgba(255, 107, 53, 0.5)',
           display: 'flex',
           flexDirection: 'column',
@@ -270,8 +270,8 @@ const StudentDashboard = () => {
           color: 'white',
           textTransform: 'none',
                   '&:hover': {
-            backgroundColor: '#e55a2b',
-            background: 'linear-gradient(45deg, #e55a2b, #ff8c42, #ffa726)',
+            backgroundColor: 'var(--warning-dark)',
+            background: 'linear-gradient(45deg, var(--warning-dark), var(--warning-light), var(--warning-dark))',
             boxShadow: '0 12px 40px rgba(255, 107, 53, 0.7)',
             transform: 'scale(1.05)',
           },
@@ -311,8 +311,8 @@ const StudentDashboard = () => {
           color={currentLocation ? 'success' : 'error'}
           variant="outlined"
           sx={{ 
-            color: currentLocation ? '#10b981' : '#ef4444',
-            borderColor: currentLocation ? '#10b981' : '#ef4444',
+            color: currentLocation ? 'var(--success-main)' : 'var(--error-main)',
+            borderColor: currentLocation ? 'var(--success-main)' : 'var(--error-main)',
           }}
                  />
                </Box>
@@ -325,8 +325,8 @@ const StudentDashboard = () => {
       <AppBar 
         position="static" 
         sx={{ 
-          backgroundColor: '#0f1419',
-          borderBottom: '1px solid #334155',
+          backgroundColor: 'var(--background-dark)',
+          borderBottom: '1px solid var(--text-secondary)',
         }}
       >
         <Toolbar sx={{ flexWrap: { xs: 'wrap', sm: 'nowrap' } }}>
@@ -344,7 +344,7 @@ const StudentDashboard = () => {
           <Box display="flex" alignItems="center" sx={{ mr: 2 }}>
             {/* <Avatar
               sx={{
-                backgroundColor: '#ff6b35',
+                backgroundColor: 'var(--warning-main)',
                 width: 32,
                 height: 32,
                 mr: 1,
@@ -403,17 +403,17 @@ const StudentDashboard = () => {
         onClose={() => setDrawerOpen(false)}
             sx={{ 
           '& .MuiDrawer-paper': {
-            backgroundColor: '#0f1419',
+            backgroundColor: 'var(--background-dark)',
             color: 'white',
             width: 280,
           },
         }}
       >
         <Box sx={{ p: 2 }}>
-          <Typography variant="h6" sx={{ mb: 2, color: '#ff6b35' }}>
+          <Typography variant="h6" sx={{ mb: 2, color: 'var(--warning-main)' }}>
             Navigation
           </Typography>
-          <Divider sx={{ backgroundColor: '#334155', mb: 2 }} />
+          <Divider sx={{ backgroundColor: 'var(--text-secondary)', mb: 2 }} />
           
           <List>
             {[
@@ -438,12 +438,12 @@ const StudentDashboard = () => {
                   },
                 }}
               >
-                <ListItemIcon sx={{ color: activeTab === tab.key ? '#ff6b35' : 'white' }}>
+                <ListItemIcon sx={{ color: activeTab === tab.key ? 'var(--warning-main)' : 'white' }}>
                   {tab.icon}
                 </ListItemIcon>
                 <ListItemText 
                   primary={tab.label}
-                  sx={{ color: activeTab === tab.key ? '#ff6b35' : 'white' }}
+                  sx={{ color: activeTab === tab.key ? 'var(--warning-main)' : 'white' }}
                 />
               </ListItem>
             ))}
@@ -465,7 +465,7 @@ const StudentDashboard = () => {
         fullWidth
         PaperProps={{
           sx: {
-            backgroundColor: '#1a2332',
+            backgroundColor: 'var(--background-card-dark)',
             color: 'white',
           }
         }}
@@ -527,9 +527,9 @@ const StudentDashboard = () => {
           aria-label="settings"
           onClick={() => setActiveTab('contacts')}
           sx={{
-            backgroundColor: '#334155',
+            backgroundColor: 'var(--text-secondary)',
             '&:hover': {
-              backgroundColor: '#475569',
+              backgroundColor: 'var(--text-disabled)',
             },
           }}
         >
@@ -542,12 +542,12 @@ const StudentDashboard = () => {
           aria-label="quick emergency"
           onClick={handleQuickEmergency}
         sx={{
-            backgroundColor: '#ff6b35',
-            background: 'linear-gradient(45deg, #ff6b35, #f7931e)',
+            backgroundColor: 'var(--warning-main)',
+            background: 'linear-gradient(45deg, var(--warning-main), var(--warning-light))',
             boxShadow: '0 4px 20px rgba(255, 107, 53, 0.4)',
           '&:hover': {
-            backgroundColor: '#e55a2b',
-            background: 'linear-gradient(45deg, #e55a2b, #ff8c42, #ffa726)',
+            backgroundColor: 'var(--warning-dark)',
+            background: 'linear-gradient(45deg, var(--warning-dark), var(--warning-light), var(--warning-dark))',
             boxShadow: '0 6px 25px rgba(255, 107, 53, 0.7)',
             transform: 'scale(1.1)',
           },

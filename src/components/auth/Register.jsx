@@ -158,7 +158,7 @@ const Register = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #8b5cf6 0%, #a855f7 25%, #c084fc 50%, #7c3aed 100%)',
+        background: 'linear-gradient(135deg, var(--secondary-main) 0%, var(--secondary-light) 25%, var(--primary-light) 50%, var(--primary-main) 100%)',
         display: 'flex',
         alignItems: 'center',
         py: 4,
@@ -189,7 +189,7 @@ const Register = () => {
               component="h1" 
               gutterBottom 
               sx={{
-                background: 'linear-gradient(45deg, #8b5cf6, #a855f7)',
+                background: 'linear-gradient(45deg, var(--secondary-main), var(--secondary-light))',
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
@@ -198,10 +198,10 @@ const Register = () => {
             >
               Safe Guardian Registration
             </Typography>
-            <Typography variant="h6" sx={{ color: '#64748b', fontWeight: 500 }}>
+            <Typography variant="h6" sx={{ color: 'var(--text-secondary)', fontWeight: 500 }}>
               Federal University, Lokoja
             </Typography>
-            <Typography variant="body2" sx={{ color: '#94a3b8', mt: 1 }}>
+            <Typography variant="body2" sx={{ color: 'var(--text-disabled)', mt: 1 }}>
               Create your account to access the safety application
             </Typography>
           </Box>
@@ -527,7 +527,7 @@ const Register = () => {
             <Box textAlign="center" mt={2}>
               <Typography variant="body2">
                 Already have an account?{' '}
-                <Link to="/login" style={{ textDecoration: 'none', color: '#1976d2' }}>
+                <Link to="/login" style={{ textDecoration: 'none', color: 'var(--primary-main)' }}>
                   Sign in here
                 </Link>
               </Typography>

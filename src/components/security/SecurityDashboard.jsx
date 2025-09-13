@@ -486,7 +486,7 @@ const SecurityDashboard = () => {
       icon: <Warning />,
       name: 'New Alert',
       action: () => generateSampleAlerts(),
-      color: '#f44336',
+      color: 'var(--error-main)',
     },
     // {
     //   icon: <Map />,
@@ -511,8 +511,8 @@ const SecurityDashboard = () => {
       <AppBar 
         position="static" 
         sx={{ 
-          backgroundColor: '#064e3b',
-          background: 'linear-gradient(45deg, #064e3b, #065f46, #047857)',
+          backgroundColor: 'var(--success-dark)',
+          background: 'linear-gradient(45deg, var(--success-dark), var(--success-main), var(--success-light))',
         }}
       >
         <Toolbar sx={{ flexWrap: { xs: 'wrap', sm: 'nowrap' } }}>
