@@ -12,7 +12,6 @@ import StudentDashboard from './components/student/StudentDashboard';
 import SecurityDashboard from './components/security/SecurityDashboard';
 import AdminDashboard from './components/admin/AdminDashboard';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import InformationHub from './components/common/InformationHub';
 import { AuthProvider } from './contexts/AuthContext.jsx';
 
 // Create theme
@@ -119,7 +118,6 @@ function App() {
                   </ProtectedRoute>
                 } 
               />
-              <Route path="/info" element={<InformationHub />} />
               <Route path="/" element={<Navigate to="/login" replace />} />
             </Routes>
           </Box>

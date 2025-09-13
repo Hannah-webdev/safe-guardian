@@ -56,7 +56,6 @@ import {
 } from '@mui/icons-material';
 import { useAuth } from '../../hooks/useAuth';
 import { toast } from 'react-toastify';
-import InformationHub from '../common/InformationHub';
 import { format } from 'date-fns';
 
 const SecurityDashboard = () => {
@@ -500,11 +499,6 @@ const SecurityDashboard = () => {
       action: () => setActiveTab('history'),
     },
     {
-      icon: <Security />,
-      name: 'Information Hub',
-      action: () => setActiveTab('hub'),
-    },
-    {
       icon: <Refresh />,
       name: 'Refresh',
       action: loadEmergencyAlerts,
@@ -588,7 +582,6 @@ const SecurityDashboard = () => {
         {/* Content */}
         {activeTab === 'dashboard' && renderDashboard()}
         {activeTab === 'history' && renderAlertHistory()}
-        {activeTab === 'hub' && <InformationHub />}
         {activeTab === 'map' && (
           <Card>
             <CardContent>

@@ -15,6 +15,8 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Autocomplete,
+  Popper,
 } from '@mui/material';
 import {
   Person,
@@ -45,6 +47,8 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
+  const [departmentSearch, setDepartmentSearch] = useState('');
+  const [filteredDepartments, setFilteredDepartments] = useState([]);
   const { register, loading } = useAuth();
   const navigate = useNavigate();
 
@@ -59,6 +63,46 @@ const Register = () => {
     'Biochemistry',
     'Microbiology',
     'Industrial Chemistry',
+    'Theatre Arts',
+    'English Language',
+    'History',
+    'Philosophy',
+    'Political Science',
+    'Sociology',
+    'Psychology',
+    'Economics',
+    'Business Administration',
+    'Accounting',
+    'Banking and Finance',
+    'Marketing',
+    'Public Administration',
+    'Mass Communication',
+    'Fine Arts',
+    'Music',
+    'French',
+    'Arabic',
+    'Islamic Studies',
+    'Christian Religious Studies',
+    'Geography',
+    'Environmental Science',
+    'Agricultural Science',
+    'Food Science',
+    'Nutrition and Dietetics',
+    'Nursing',
+    'Medicine',
+    'Pharmacy',
+    'Law',
+    'Education',
+    'Library Science',
+    'Architecture',
+    'Civil Engineering',
+    'Mechanical Engineering',
+    'Electrical Engineering',
+    'Chemical Engineering',
+    'Petroleum Engineering',
+    'Mining Engineering',
+    'Metallurgical Engineering',
+    'Agricultural Engineering',
   ];
 
   const levels = ['100', '200', '300', '400', '500'];
@@ -83,6 +127,27 @@ const Register = () => {
       [e.target.name]: e.target.value,
     });
     setError('');
+  };
+
+  const handleDepartmentSearch = (searchTerm) => {
+    setDepartmentSearch(searchTerm);
+    if (searchTerm.length > 0) {
+      const filtered = departments.filter(dept =>
+        dept.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredDepartments(filtered);
+    } else {
+      setFilteredDepartments([]);
+    }
+  };
+
+  const handleDepartmentSelect = (department) => {
+    setFormData({
+      ...formData,
+      department: department,
+    });
+    setDepartmentSearch('');
+    setFilteredDepartments([]);
   };
 
   const validateForm = () => {
@@ -380,26 +445,47 @@ const Register = () => {
               {/* Department - Only for students */}
               {formData.role === 'student' && (
                 <Grid item xs={12} sm={6}>
-                  <FormControl fullWidth required disabled={loading}>
-                    <InputLabel>Department</InputLabel>
-                    <Select
-                      name="department"
-                      value={formData.department}
-                      onChange={handleChange}
-                      label="Department"
-                      startAdornment={
-                        <InputAdornment position="start">
-                          <School />
-                        </InputAdornment>
+                  <Autocomplete
+                    fullWidth
+                    options={departmentSearch.length > 0 ? filteredDepartments : []}
+                    value={formData.department || null}
+                    onChange={(event, newValue) => {
+                      if (newValue) {
+                        handleDepartmentSelect(newValue);
                       }
-                    >
-                      {departments.map((dept) => (
-                        <MenuItem key={dept} value={dept}>
-                          {dept}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
+                    }}
+                    inputValue={departmentSearch}
+                    onInputChange={(event, newInputValue) => {
+                      handleDepartmentSearch(newInputValue);
+                    }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Department"
+                        required
+                        disabled={loading}
+                        placeholder="Type to search departments..."
+                        InputProps={{
+                          ...params.InputProps,
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <School />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    )}
+                    renderOption={(props, option) => (
+                      <Box component="li" {...props}>
+                        {option}
+                      </Box>
+                    )}
+                    noOptionsText="No departments found. Try typing to search..."
+                    freeSolo={false}
+                    clearOnBlur={false}
+                    selectOnFocus={true}
+                    handleHomeEndKeys={true}
+                  />
                 </Grid>
               )}
 
