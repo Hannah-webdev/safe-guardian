@@ -57,6 +57,7 @@ const StudentDashboard = () => {
   const [sessionInfo, setSessionInfo] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [contacts, setContacts] = useState([]);
+  const [panicMode, setPanicMode] = useState(false);
 
   // Get current location
   useEffect(() => {
@@ -156,7 +157,10 @@ const StudentDashboard = () => {
       // Wait for all SMS to be "sent"
       await Promise.all(smsPromises);
 
-      toast.success(`Emergency alert sent! Notified ${phoneNumbers.length} security personnel.`);
+      // Trigger panic mode
+      setPanicMode(true);
+      
+      toast.success(`🚨 EMERGENCY ALERT SENT! Notified ${phoneNumbers.length} security personnel.`);
       setEmergencyDialog(false);
       setEmergencyMessage('');
       
@@ -164,6 +168,12 @@ const StudentDashboard = () => {
       setTimeout(() => {
         toast.info('Security team is on their way to your location.');
       }, 2000);
+      
+      // Auto-exit panic mode after 30 seconds
+      setTimeout(() => {
+        setPanicMode(false);
+        toast.info('Panic mode deactivated. Stay safe!');
+      }, 30000);
 
       // Show location details
       setTimeout(() => {
@@ -184,9 +194,12 @@ const StudentDashboard = () => {
 
   const renderGuardianAngelUI = () => (
     <Box
+      className={panicMode ? 'panic-mode' : ''}
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, var(--background-dark) 0%, var(--primary-dark) 50%, var(--primary-main) 100%)',
+        background: panicMode 
+          ? 'linear-gradient(135deg, var(--panic-bg-primary) 0%, var(--panic-bg-secondary) 50%, var(--panic-bg-accent) 100%)'
+          : 'linear-gradient(135deg, var(--background-dark) 0%, var(--primary-dark) 50%, var(--primary-main) 100%)',
         color: 'white',
         display: 'flex',
         flexDirection: 'column',
@@ -194,29 +207,34 @@ const StudentDashboard = () => {
         justifyContent: 'center',
         px: { xs: 2, sm: 4 },
         py: 4,
+        transition: 'all 0.5s ease-in-out',
       }}
     >
       {/* Main Title */}
       <Typography
         variant="h2"
         component="h1"
+        className={panicMode ? 'panic-accent' : ''}
         sx={{
           fontWeight: 'bold',
           textAlign: 'center',
           mb: 2,
           fontSize: { xs: '2rem', sm: '3rem', md: '4rem' },
-          background: 'linear-gradient(45deg, var(--accent-emerald), var(--accent-emerald-light), var(--accent-emerald-dark))',
+          background: panicMode 
+            ? 'linear-gradient(45deg, var(--panic-accent), var(--panic-accent-light), var(--panic-accent-dark))'
+            : 'linear-gradient(45deg, var(--accent-emerald), var(--accent-emerald-light), var(--accent-emerald-dark))',
           backgroundClip: 'text',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
         }}
       >
-        Emergency Alert
+        {panicMode ? '🚨 PANIC MODE ACTIVE 🚨' : 'Emergency Alert'}
             </Typography>
 
       {/* Description */}
       <Typography
         variant="h6"
+        className={panicMode ? 'panic-text' : ''}
         sx={{
           textAlign: 'center',
           mb: 4,
@@ -226,7 +244,10 @@ const StudentDashboard = () => {
           lineHeight: 1.6,
         }}
       >
-        In case of an emergency, press the button below. Your location will be shared with campus security immediately. Stay safe.
+        {panicMode 
+          ? '🚨 EMERGENCY ALERT SENT! Security has been notified of your location. Stay calm and wait for assistance. Help is on the way! 🚨'
+          : 'In case of an emergency, press the button below. Your location will be shared with campus security immediately. Stay safe.'
+        }
               </Typography>
 
       {/* Emergency Contacts Status */}
@@ -257,9 +278,13 @@ const StudentDashboard = () => {
           width: { xs: 200, sm: 250, md: 300 },
           height: { xs: 200, sm: 250, md: 300 },
           borderRadius: '50%',
-          backgroundColor: 'var(--accent-emerald)',
-          background: 'linear-gradient(45deg, var(--accent-emerald), var(--accent-emerald-light), var(--accent-emerald-dark))',
-          boxShadow: '0 8px 32px rgba(255, 107, 53, 0.5)',
+          backgroundColor: panicMode ? 'var(--panic-primary)' : 'var(--accent-emerald)',
+          background: panicMode 
+            ? 'linear-gradient(45deg, var(--panic-primary), var(--panic-secondary), var(--panic-tertiary))'
+            : 'linear-gradient(45deg, var(--accent-emerald), var(--accent-emerald-light), var(--accent-emerald-dark))',
+          boxShadow: panicMode 
+            ? '0 8px 32px rgba(220, 38, 38, 0.8)'
+            : '0 8px 32px rgba(255, 107, 53, 0.5)',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -270,9 +295,13 @@ const StudentDashboard = () => {
           color: 'white',
           textTransform: 'none',
                   '&:hover': {
-            backgroundColor: 'var(--accent-emerald-dark)',
-            background: 'linear-gradient(45deg, var(--accent-emerald-dark), var(--accent-emerald-light), var(--accent-emerald-dark))',
-            boxShadow: '0 12px 40px rgba(255, 107, 53, 0.7)',
+            backgroundColor: panicMode ? 'var(--panic-secondary)' : 'var(--accent-emerald-dark)',
+            background: panicMode 
+              ? 'linear-gradient(45deg, var(--panic-secondary), var(--panic-tertiary), var(--panic-secondary))'
+              : 'linear-gradient(45deg, var(--accent-emerald-dark), var(--accent-emerald-light), var(--accent-emerald-dark))',
+            boxShadow: panicMode 
+              ? '0 12px 40px rgba(220, 38, 38, 1)'
+              : '0 12px 40px rgba(255, 107, 53, 0.7)',
             transform: 'scale(1.05)',
           },
           animation: 'pulse 2s infinite',
@@ -291,7 +320,7 @@ const StudentDashboard = () => {
               >
         <Campaign sx={{ fontSize: { xs: '2rem', sm: '3rem' } }} />
         <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
-          PANIC
+          {panicMode ? 'ALERT SENT' : 'PANIC'}
         </Typography>
               </Button>
 
@@ -567,6 +596,48 @@ const StudentDashboard = () => {
       >
           <Campaign />
       </Fab> */}
+      
+      {/* Panic Mode Toggle Button (for testing) */}
+      {!panicMode && (
+        <Button
+          variant="outlined"
+          onClick={() => setPanicMode(true)}
+          sx={{
+            position: 'absolute',
+            top: 20,
+            right: 20,
+            backgroundColor: 'rgba(220, 38, 38, 0.1)',
+            borderColor: 'var(--panic-primary)',
+            color: 'var(--panic-primary)',
+            '&:hover': {
+              backgroundColor: 'rgba(220, 38, 38, 0.2)',
+              borderColor: 'var(--panic-secondary)',
+            },
+          }}
+        >
+          Test Panic Mode
+        </Button>
+      )}
+      
+      {/* Panic Mode Exit Button */}
+      {panicMode && (
+        <Button
+          variant="contained"
+          onClick={() => setPanicMode(false)}
+          sx={{
+            position: 'absolute',
+            top: 20,
+            right: 20,
+            backgroundColor: 'var(--panic-accent)',
+            color: 'var(--panic-bg-primary)',
+            '&:hover': {
+              backgroundColor: 'var(--panic-accent-light)',
+            },
+          }}
+        >
+          Exit Panic Mode
+        </Button>
+      )}
       </Box>
     </Box>
   );

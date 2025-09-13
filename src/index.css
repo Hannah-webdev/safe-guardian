@@ -70,6 +70,24 @@
   --accent-emerald: #10b981;
   --accent-emerald-light: #34d399;
   --accent-emerald-dark: #059669;
+  
+  /* Panic Mode Colors - Red Button & Dark Navy Background */
+  --panic-primary: #dc2626;
+  --panic-secondary: #b91c1c;
+  --panic-tertiary: #991b1b;
+  --panic-accent: #dc2626;
+  --panic-accent-light: #ef4444;
+  --panic-accent-dark: #b91c1c;
+  
+  /* Panic Mode Backgrounds - Dark Navy Grey */
+  --panic-bg-primary: #0f172a;
+  --panic-bg-secondary: #1e293b;
+  --panic-bg-accent: #334155;
+  
+  /* Panic Mode Text */
+  --panic-text-primary: #ffffff;
+  --panic-text-secondary: #f1f5f9;
+  --panic-text-accent: #dc2626;
 }
 
 * {
@@ -456,4 +474,50 @@ textarea:focus {
 
 .Toastify__toast--info {
   background-color: var(--info-main);
+}
+
+/* Panic Mode Styles */
+.panic-mode {
+  background: linear-gradient(135deg, var(--panic-bg-primary) 0%, var(--panic-bg-secondary) 50%, var(--panic-bg-accent) 100%) !important;
+  color: var(--panic-text-primary) !important;
+}
+
+.panic-mode .panic-button {
+  background: linear-gradient(45deg, var(--panic-primary), var(--panic-secondary)) !important;
+  color: var(--panic-text-primary) !important;
+  box-shadow: 0 4px 20px rgba(220, 38, 38, 0.6) !important;
+  animation: panicPulse 1s infinite !important;
+}
+
+.panic-mode .panic-button:hover {
+  background: linear-gradient(45deg, var(--panic-secondary), var(--panic-tertiary)) !important;
+  box-shadow: 0 6px 25px rgba(220, 38, 38, 0.8) !important;
+}
+
+.panic-mode .panic-accent {
+  color: var(--panic-accent) !important;
+}
+
+.panic-mode .panic-text {
+  color: var(--panic-text-primary) !important;
+}
+
+.panic-mode .panic-text-secondary {
+  color: var(--panic-text-secondary) !important;
+}
+
+/* Panic Mode Animation */
+@keyframes panicPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.8);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 15px rgba(220, 38, 38, 0.4);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+  }
 }
