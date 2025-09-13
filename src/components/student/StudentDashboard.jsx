@@ -186,7 +186,7 @@ const StudentDashboard = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, var(--background-dark) 0%, var(--primary-dark) 50%, var(--primary-main) 100%)',
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)',
         color: 'white',
         display: 'flex',
         flexDirection: 'column',
@@ -205,13 +205,13 @@ const StudentDashboard = () => {
           textAlign: 'center',
           mb: 2,
           fontSize: { xs: '2rem', sm: '3rem', md: '4rem' },
-          background: 'linear-gradient(45deg, var(--accent-emerald), var(--accent-emerald-light), var(--accent-emerald-dark))',
+          background: 'linear-gradient(45deg, #dc2626, #ef4444, #b91c1c)',
           backgroundClip: 'text',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
         }}
       >
-        Emergency Alert
+        PANIC
             </Typography>
 
       {/* Description */}
@@ -257,9 +257,9 @@ const StudentDashboard = () => {
           width: { xs: 200, sm: 250, md: 300 },
           height: { xs: 200, sm: 250, md: 300 },
           borderRadius: '50%',
-          backgroundColor: 'var(--accent-emerald)',
-          background: 'linear-gradient(45deg, var(--accent-emerald), var(--accent-emerald-light), var(--accent-emerald-dark))',
-          boxShadow: '0 8px 32px rgba(255, 107, 53, 0.5)',
+          backgroundColor: '#dc2626',
+          background: 'linear-gradient(45deg, #dc2626, #ef4444, #b91c1c)',
+          boxShadow: '0 8px 32px rgba(220, 38, 38, 0.6)',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -270,21 +270,21 @@ const StudentDashboard = () => {
           color: 'white',
           textTransform: 'none',
                   '&:hover': {
-            backgroundColor: 'var(--accent-emerald-dark)',
-            background: 'linear-gradient(45deg, var(--accent-emerald-dark), var(--accent-emerald-light), var(--accent-emerald-dark))',
-            boxShadow: '0 12px 40px rgba(255, 107, 53, 0.7)',
+            backgroundColor: '#b91c1c',
+            background: 'linear-gradient(45deg, #b91c1c, #dc2626, #991b1b)',
+            boxShadow: '0 12px 40px rgba(220, 38, 38, 0.8)',
             transform: 'scale(1.05)',
           },
           animation: 'pulse 2s infinite',
           '@keyframes pulse': {
             '0%': {
-              boxShadow: '0 8px 32px rgba(255, 107, 53, 0.4)',
+              boxShadow: '0 8px 32px rgba(220, 38, 38, 0.4)',
             },
             '50%': {
-              boxShadow: '0 8px 32px rgba(255, 107, 53, 0.8)',
+              boxShadow: '0 8px 32px rgba(220, 38, 38, 0.8)',
             },
             '100%': {
-              boxShadow: '0 8px 32px rgba(255, 107, 53, 0.4)',
+              boxShadow: '0 8px 32px rgba(220, 38, 38, 0.4)',
             },
                   },
                 }}
