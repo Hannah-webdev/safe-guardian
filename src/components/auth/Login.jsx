@@ -85,15 +85,6 @@ const Login = () => {
       name: 'John Doe (Student)',
     },
     {
-      role: 'Student',
-      roleValue: 'student',
-      email: 'mary.smith@student.fulokoja.edu.ng',
-      password: 'student456',
-      icon: <School />,
-      color: 'var(--student-color)',
-      name: 'Mary Smith (Student)',
-    },
-    {
       role: 'Security',
       roleValue: 'security',
       email: 'ahmed.ibrahim@staff.fulokoja.edu.ng',
@@ -119,15 +110,6 @@ const Login = () => {
       icon: <AdminPanelSettings />,
       color: 'var(--admin-color)',
       name: 'Dr. Adewumi (Admin)',
-    },
-    {
-      role: 'Admin',
-      roleValue: 'admin',
-      email: 'ict.admin@fulokoja.edu.ng',
-      password: 'admin456',
-      icon: <AdminPanelSettings />,
-      color: 'var(--admin-color)',
-      name: 'Prof. Ogunbiyi (Admin)',
     },
   ];
 
