@@ -164,7 +164,7 @@ const Register = () => {
         py: 4,
       }}
     >
-      <Container maxWidth="md">
+      <Container maxWidth="sm">
         <Box
           sx={{
             display: 'flex',
@@ -176,16 +176,16 @@ const Register = () => {
           elevation={8}
           sx={{
             width: '100%',
-            p: 4,
+            p: 2,
             backgroundColor: 'rgba(255, 255, 255, 0.95)',
             backdropFilter: 'blur(10px)',
             borderRadius: 3,
             border: '1px solid rgba(255, 255, 255, 0.2)',
           }}
         >
-          <Box textAlign="center" mb={4}>
+          <Box textAlign="center" mb={2}>
             <Typography 
-              variant="h4" 
+              variant="h5" 
               component="h1" 
               gutterBottom 
               sx={{
@@ -198,7 +198,7 @@ const Register = () => {
             >
               Safe Guardian Registration
             </Typography>
-            <Typography variant="h6" sx={{ color: 'var(--text-secondary)', fontWeight: 500 }}>
+            <Typography variant="body1" sx={{ color: 'var(--text-secondary)', fontWeight: 500 }}>
               Federal University, Lokoja
             </Typography>
             <Typography variant="body2" sx={{ color: 'var(--text-disabled)', mt: 1 }}>
@@ -213,10 +213,10 @@ const Register = () => {
           )}
 
           <Box component="form" onSubmit={handleSubmit}>
-            <Grid container spacing={3}>
+            <Grid container spacing={2}>
               {/* Personal Information */}
               <Grid item xs={12}>
-                <Typography variant="h6" gutterBottom color="primary">
+                <Typography variant="subtitle1" gutterBottom color="primary" sx={{ fontWeight: 'bold' }}>
                   Personal Information
                 </Typography>
               </Grid>
@@ -281,7 +281,7 @@ const Register = () => {
 
               {/* Role Selection */}
               <Grid item xs={12}>
-                <Typography variant="h6" gutterBottom color="primary" sx={{ mt: 2 }}>
+                <Typography variant="subtitle1" gutterBottom color="primary" sx={{ mt: 1, fontWeight: 'bold' }}>
                   Account Type
                 </Typography>
               </Grid>
@@ -315,7 +315,7 @@ const Register = () => {
               {formData.role === 'student' && (
                 <>
                   <Grid item xs={12}>
-                    <Typography variant="h6" gutterBottom color="primary" sx={{ mt: 2 }}>
+                    <Typography variant="subtitle1" gutterBottom color="primary" sx={{ mt: 1, fontWeight: 'bold' }}>
                       Academic Information
                     </Typography>
                   </Grid>
@@ -326,7 +326,7 @@ const Register = () => {
               {(formData.role === 'security' || formData.role === 'admin') && (
                 <>
                   <Grid item xs={12}>
-                    <Typography variant="h6" gutterBottom color="primary" sx={{ mt: 2 }}>
+                    <Typography variant="subtitle1" gutterBottom color="primary" sx={{ mt: 1, fontWeight: 'bold' }}>
                       Staff Information
                     </Typography>
                   </Grid>
@@ -447,7 +447,7 @@ const Register = () => {
 
               {/* Security Information */}
               <Grid item xs={12}>
-                <Typography variant="h6" gutterBottom color="primary" sx={{ mt: 2 }}>
+                <Typography variant="subtitle1" gutterBottom color="primary" sx={{ mt: 1, fontWeight: 'bold' }}>
                   Security Information
                 </Typography>
               </Grid>
@@ -518,7 +518,7 @@ const Register = () => {
               fullWidth
               variant="contained"
               size="large"
-              sx={{ mt: 4, mb: 2, py: 1.5 }}
+              sx={{ mt: 2, mb: 2, py: 1 }}
               disabled={loading}
             >
               {loading ? 'Creating Account...' : 'Create Account'}
